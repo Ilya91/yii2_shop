@@ -4,37 +4,34 @@ namespace frontend\services\auth;
 
 use frontend\forms\PasswordResetRequestForm;
 use frontend\forms\ResetPasswordForm;
-//use shop\repositories\UserRepository;
+use common\repositories\UserRepository;
 use Yii;
-//use yii\mail\MailerInterface;
 use common\models\User;
+use yii\mail\MailerInterface;
 
 class PasswordResetService
 {
-    /*private $mailer;
-    private $users;
+    private $supportEmail;
+    private $mailer;
+    private $repository;
 
-    public function __construct(UserRepository $users, MailerInterface $mailer)
+    public function __construct($supportEmail, MailerInterface $mailer, UserRepository $repository)
     {
+        $this->supportEmail = $supportEmail;
         $this->mailer = $mailer;
-        $this->users = $users;
-    }*/
+        $this->repository = $repository;
+    }
 
     public function request(PasswordResetRequestForm $form)
     {
         /* @var $user User */
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $form->email,
-        ]);
+        $user = $this->repository->getByEmail($form->email);
 
         if (!$user) {
             throw new \DomainException('User is not active.');
         }
         $user->requestPasswordReset();
-        if (!$user->save()) {
-            throw new \RuntimeException('Saving error.');
-        }
+        $this->repository->save($user);
 
         /*if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
@@ -43,11 +40,12 @@ class PasswordResetService
             }
         }*/
 
-        $sent = Yii::$app->mailer
+        $sent = $this->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                 ['user' => $user]
             )
+            ->setFrom($this->supportEmail)
             ->setTo($user->email)
             ->setSubject('Password reset for ' . Yii::$app->name)
             ->send();
@@ -78,8 +76,6 @@ class PasswordResetService
 
         $user->resetPassword($form->password);
 
-        if (!$user->save()) {
-            throw new \RuntimeException('Saving error.');
-        }
+        $this->repository->save($user);
     }
 }

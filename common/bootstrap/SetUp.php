@@ -4,6 +4,7 @@ namespace common\bootstrap;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use frontend\services\auth\PasswordResetService;
 use League\Flysystem\Adapter\Ftp;
 use League\Flysystem\Filesystem;
 use shop\cart\Cart;
@@ -34,7 +35,6 @@ use shop\services\yandex\ShopInfo;
 use shop\services\yandex\YandexMarket;
 use shop\entities\User\events\UserSignUpConfirmed;
 use shop\entities\User\events\UserSignUpRequested;
-use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\base\ErrorHandler;
 use yii\caching\Cache;
@@ -44,12 +44,27 @@ use yii\mail\MailerInterface;
 use yii\rbac\ManagerInterface;
 use yiidreamteam\upload\ImageUploadBehavior;
 use zhuravljov\yii\queue\Queue;
+use Yii;
+use frontend\services\contact\ContactService;
 
 class SetUp implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        // TODO: Implement bootstrap() method.
+        $container = Yii::$container;
+        $container->setSingleton(PasswordResetService::class, [], [
+            [ $app->params['supportEmail'] => $app->name . ' robot' ],
+            $app->mailer
+        ]);
+
+        $container->setSingleton(MailerInterface::class, function () use ($app) {
+            return $app->mailer;
+        });
+
+        $container->setSingleton(ContactService::class, [], [
+            $app->params['adminEmail'],
+            Instance::of(MailerInterface::class)
+        ]);
     }
     /*    public function bootstrap($app)
         {

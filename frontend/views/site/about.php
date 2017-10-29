@@ -12,7 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>This is the About page. You may modify the following file to customize its content:</p>
     <?php
-        var_dump(Yii::$app->params);
+        //var_dump(Yii::$app->params);
+        //var_dump(Yii::$container);
+        var_dump(Yii::$app->urlManager);
+
     ?>
 
     <code><?= __FILE__ ?></code>

@@ -5,16 +5,28 @@ namespace frontend\services\auth;
 
 use common\models\User;
 use frontend\forms\SignupForm;
+use Yii;
+use yii\mail\MailerInterface;
+use common\repositories\UserRepository;
 
 class SignupService
 {
+
+    private $mailer;
+    private $repository;
+
+    public function __construct(MailerInterface $mailer, UserRepository $repository)
+    {
+        $this->mailer = $mailer;
+        $this->repository = $repository;
+    }
     public function signup(SignupForm $form){
 
-        if (User::find()->where(['username' => $form->username])->one()){
+        if ($this->repository->findByUsernameOrEmail($form->username)){
             throw new \DomainException('Username is already exist.');
         }
 
-        if (User::find()->andWhere(['email' => $form->email])->one()){
+        if ($this->repository->findByUsernameOrEmail($form->email)){
             throw new \DomainException('Email is already exist.');
         }
 
@@ -24,10 +36,35 @@ class SignupService
             $form->password
         );
 
-        if (!$user->save()){
-            throw new \RuntimeException('Saving error.');
-        }
+        $this->repository->save($user, false);
 
-        return $user;
+        $sent = $this->mailer
+            ->compose(
+                ['html' => 'confirm-html', 'text' => 'confirm-text'],
+                ['user' => $user]
+            )
+            ->setFrom($form->email)
+            ->setTo($user->email)
+            ->setSubject('Signup confirm for ' . Yii::$app->name)
+            ->send();
+
+        if (!$sent) {
+            throw new \RuntimeException('Sending error.');
+        }
+    }
+
+    public function confirm($token)
+    {
+        if (empty($token)) {
+            throw new \DomainException('Empty confirm token.');
+        }
+        $user = $this->repository->getByEmailConfirmToken($token);
+
+        if (!$user) {
+            throw new \DomainException('User is not found.');
+        }
+        //$user = $this->users->getByEmailConfirmToken($token);
+        $user->confirmSignup();
+        $this->repository->save($user);
     }
 }

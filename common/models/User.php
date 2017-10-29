@@ -11,6 +11,7 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
+ * @property string $email_confirm_token
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
@@ -23,8 +24,28 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            ['email_confirm_token', 'string'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['email_comfirm_token',
+                'created_at',
+                'status',
+                'auth_key',
+                'password_hash'
+                ], 'safe']
+        ];
+    }
+
+    const STATUS_WAIT = 5;
     const STATUS_ACTIVE = 10;
+    const STATUS_DELETED = 10;
 
 
     public static function signup($username, $email, /*$phone,*/ $password)
@@ -32,12 +53,27 @@ class User extends ActiveRecord implements IdentityInterface
         $user = new User();
         $user->username = $username;
         $user->email = $email;
+        $user->email_confirm_token = Yii::$app->security->generateRandomString();
         //$user->phone = $phone;
-        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
+        $user->setPassword($password);
         $user->created_at = time();
-        $user->status = self::STATUS_ACTIVE;
-        $user->auth_key = Yii::$app->security->generateRandomString();
+        $user->status = self::STATUS_WAIT;
+        $user->generateAuthKey();
         return $user;
+    }
+
+    public function confirmSignup()
+    {
+        if (!$this->isWait()) {
+            throw new \DomainException('User is already active.');
+        }
+        $this->status = self::STATUS_ACTIVE;
+        $this->email_confirm_token = null;
+    }
+
+    public function isWait()
+    {
+        return $this->status === self::STATUS_WAIT;
     }
 
     public function requestPasswordReset()
@@ -80,16 +116,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -192,7 +218,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
+    private function setPassword($password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -203,6 +229,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public function generateEmailConfirmToken(){
+        $this->email_comfirm_token = Yii::$app->security->generateRandomString();
     }
 
     /**
