@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\services\auth;
+namespace shop\services\auth;
 
-use frontend\forms\PasswordResetRequestForm;
-use frontend\forms\ResetPasswordForm;
-use common\repositories\UserRepository;
+use shop\forms\PasswordResetRequestForm;
+use shop\forms\ResetPasswordForm;
+use shop\repositories\UserRepository;
 use Yii;
 use common\models\User;
 use yii\mail\MailerInterface;

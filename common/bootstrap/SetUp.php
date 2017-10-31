@@ -4,7 +4,7 @@ namespace common\bootstrap;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
-use frontend\services\auth\PasswordResetService;
+use shop\services\auth\PasswordResetService;
 use League\Flysystem\Adapter\Ftp;
 use League\Flysystem\Filesystem;
 use shop\cart\Cart;
@@ -45,7 +45,7 @@ use yii\rbac\ManagerInterface;
 use yiidreamteam\upload\ImageUploadBehavior;
 use zhuravljov\yii\queue\Queue;
 use Yii;
-use frontend\services\contact\ContactService;
+use shop\services\contact\ContactService;
 
 class SetUp implements BootstrapInterface
 {

@@ -1,21 +1,21 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\services\contact\ContactService;
-use frontend\services\auth\PasswordResetService;
-use frontend\services\auth\SignupService;
+use shop\services\contact\ContactService;
+use shop\services\auth\PasswordResetService;
+use shop\services\auth\SignupService;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\forms\LoginForm;
-use frontend\forms\PasswordResetRequestForm;
-use frontend\forms\ResetPasswordForm;
-use frontend\forms\SignupForm;
-use frontend\forms\ContactForm;
-use common\services\AuthService;
+use shop\forms\LoginForm;
+use shop\forms\PasswordResetRequestForm;
+use shop\forms\ResetPasswordForm;
+use shop\forms\SignupForm;
+use shop\forms\ContactForm;
+use shop\services\AuthService;
 
 /**
  * Site controller
