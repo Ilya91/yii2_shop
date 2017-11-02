@@ -10,12 +10,13 @@ return [
     'showScriptName' => false,
     'cache' => false,
     'rules' => [
-        '<alias:\w+>' => 'site/<alias>',
         '' => 'site/index',
-        'contact' => 'contact/index',
-        'signup' => 'auth/signup/request',
+        'contacts' => 'contacts/',
+        'signup' => 'auth/signup/signup',
+        'reset' => 'auth/reset/request',
         'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
         '<_a:login|logout>' => 'auth/auth/<_a>',
+	    //'<alias:\w+>' => 'site/<alias>',
 
         /*['pattern' => 'yandex-market', 'route' => 'market/index', 'suffix' => '.xml'],
 
@@ -41,9 +42,9 @@ return [
 
         ['class' => 'frontend\urls\PageUrlRule'],*/
 
-        '<_c:[\w\-]+>' => '<_c>/index',
+        /*'<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
         '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',
-        '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',
+        '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',*/
     ],
 ];
