@@ -53,7 +53,7 @@ class SetUp implements BootstrapInterface
     {
         $container = Yii::$container;
         $container->setSingleton(PasswordResetService::class, [], [
-            [ $app->params['supportEmail'] => $app->name . ' robot' ],
+            //[ $app->params['supportEmail'] => $app->name . ' robot' ],
             $app->mailer
         ]);
 

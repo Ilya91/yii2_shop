@@ -6,6 +6,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use shop\entities\User\Network;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * User model
@@ -71,6 +73,16 @@ class User extends ActiveRecord implements IdentityInterface
         $this->email_confirm_token = null;
     }
 
+	public static function signupByNetwork($network, $identity)
+	{
+		$user = new User();
+		$user->created_at = time();
+		$user->status = self::STATUS_ACTIVE;
+		$user->generateAuthKey();
+		$user->networks = [Network::create($network, $identity)];
+		return $user;
+	}
+
     public function isWait()
     {
         return $this->status === self::STATUS_WAIT;
@@ -112,9 +124,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+	        TimestampBehavior::className(),
+	        [
+		        'class' => SaveRelationsBehavior::className(),
+		        'relations' => ['networks',],
+	        ],
         ];
     }
+
+	public function transactions()
+	{
+		return [
+			self::SCENARIO_DEFAULT => self::OP_ALL,
+		];
+	}
 
 
     /**
@@ -250,4 +273,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+	public function getNetworks()
+	{
+		return $this->hasMany(Network::className(), ['user_id' => 'id']);
+	}
 }
