@@ -9,7 +9,6 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [
-        '<alias:\w+>' => 'site/<alias>',
         '' => 'site/index',
         '<_a:login|logout>' => 'auth/<_a>',
 
@@ -17,5 +16,7 @@ return [
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
         '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',
         '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',
+
+        '<alias:\w+>' => 'site/<alias>'
     ],
 ];

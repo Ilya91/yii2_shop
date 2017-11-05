@@ -21,7 +21,9 @@
         "dmstr/yii2-adminlte-asset": "2.*",
         "phpunit/phpunit": "^5.7",
         "la-haute-societe/yii2-save-relations-behavior": "*",
-        "yiisoft/yii2-authclient": "~2.1.0"
+        "yiisoft/yii2-authclient": "~2.1.0",
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-field-range": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

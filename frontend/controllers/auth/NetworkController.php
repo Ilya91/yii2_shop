@@ -3,7 +3,7 @@
 namespace frontend\controllers\auth;
 
 //use common\auth\Identity;
-use shop\useCases\auth\NetworkService;
+use shop\services\auth\NetworkService;
 use Yii;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
@@ -24,7 +24,7 @@ class NetworkController extends Controller
     {
         return [
             'auth' => [
-                'class' => AuthAction::class,
+                'class' => AuthAction::className(),
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
         ];
@@ -34,10 +34,10 @@ class NetworkController extends Controller
     {
         $network = $client->getId();
         $attributes = $client->getUserAttributes();
-        $identity = ArrayHelper::getValue($attributes, 'id');
-
+        //$identity = ArrayHelper::getValue($attributes, 'id');
+        //var_dump($attributes);
         try {
-            $user = $this->service->auth($network, $identity);
+            $user = $this->service->auth($network, $attributes);
             Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);

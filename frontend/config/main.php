@@ -37,6 +37,27 @@ return [
             'errorAction' => 'site/error',
         ],
 
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => 'google_client_id',
+                    'clientSecret' => 'google_client_secret',
+                ],
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => 'facebook_client_id',
+                    'clientSecret' => 'секретный_ключ_facebook_client',
+                ],
+                'vkontakte' => [
+                  'class' => 'yii\authclient\clients\VKontakte',
+                  'clientId' => '5817742',
+                  'clientSecret' => 'ObZlACGiGb96lVs8WhYF',
+              ],
+            ],
+        ],
+
         'backendUrlManager' => require __DIR__ . '/../../backend/config/urlManager.php',
         'frontendUrlManager' => require __DIR__ . '/urlManager.php',
         'urlManager' => function () {

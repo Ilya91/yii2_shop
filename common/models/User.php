@@ -73,9 +73,11 @@ class User extends ActiveRecord implements IdentityInterface
         $this->email_confirm_token = null;
     }
 
-	public static function signupByNetwork($network, $identity)
+	public static function signupByNetwork($network, $attributes)
 	{
+        $identity = $attributes['id'];
 		$user = new User();
+        $user->username = $attributes['first_name'];
 		$user->created_at = time();
 		$user->status = self::STATUS_ACTIVE;
 		$user->generateAuthKey();
@@ -127,7 +129,7 @@ class User extends ActiveRecord implements IdentityInterface
 	        TimestampBehavior::className(),
 	        [
 		        'class' => SaveRelationsBehavior::className(),
-		        'relations' => ['networks',],
+		        'relations' => ['networks'],
 	        ],
         ];
     }
@@ -278,4 +280,16 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->hasMany(Network::className(), ['user_id' => 'id']);
 	}
+
+    public function attachNetwork($network, $identity)
+    {
+        $networks = $this->networks;
+        foreach ($networks as $current) {
+            if ($current->isFor($network, $identity)) {
+                throw new \DomainException('Network is already attached.');
+            }
+        }
+        $networks[] = Network::create($network, $identity);
+        $this->networks = $networks;
+    }
 }

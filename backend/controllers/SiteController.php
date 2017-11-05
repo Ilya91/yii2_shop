@@ -5,13 +5,23 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\forms\LoginForm;
+use shop\forms\LoginForm;
+use shop\services\AuthService;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
+    private $service;
+
+    public function __construct( $id, $module, AuthService $service, array $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     /**
      * @inheritdoc
      */
@@ -76,14 +86,19 @@ class SiteController extends Controller
 
         $this->layout = 'main-login';
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            try{
+                $user = $this->service->auth($model);
+                Yii::$app->user->login($user, $model->rememberMe ? 3600 * 24 * 30 : 0);
+                return $this->goBack();
+            }catch (\DomainException $e){
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
             return $this->render('login', [
                 'model' => $model,
             ]);
         }
-    }
 
     /**
      * Logout action.

@@ -2,6 +2,7 @@
 
 namespace shop\entities\User;
 
+use common\models\User;
 use Webmozart\Assert\Assert;
 use yii\db\ActiveRecord;
 

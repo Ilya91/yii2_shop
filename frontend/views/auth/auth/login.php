@@ -32,8 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
-
             <?php ActiveForm::end(); ?>
+            <h2>Socials</h2>
+            <?= yii\authclient\widgets\AuthChoice::widget([
+                    'baseAuthUrl' => ['auth/network/auth']
+            ]); ?>
         </div>
     </div>
 </div>

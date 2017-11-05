@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\useCases\auth;
+namespace shop\services\auth;
 
 use common\models\User;
 use shop\repositories\UserRepository;
@@ -14,12 +14,13 @@ class NetworkService
         $this->users = $users;
     }
 
-    public function auth($network, $identity)
+    public function auth($network, $attributes)
     {
-        if ($user = $this->users->findByNetworkIdentity($network, $identity)) {
+        $id = $attributes['id'];
+        if ($user = $this->users->findByNetworkIdentity($network, $id)) {
             return $user;
         }
-        $user = User::signupByNetwork($network, $identity);
+        $user = User::signupByNetwork($network, $attributes);
         $this->users->save($user);
         return $user;
     }
