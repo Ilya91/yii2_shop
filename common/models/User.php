@@ -30,7 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    /*public function rules()
     {
         return [
             ['email_confirm_token', 'string'],
@@ -43,11 +43,11 @@ class User extends ActiveRecord implements IdentityInterface
                 'password_hash'
                 ], 'safe']
         ];
-    }
+    }*/
 
     const STATUS_WAIT = 5;
     const STATUS_ACTIVE = 10;
-    const STATUS_DELETED = 10;
+    const STATUS_DELETED = 15;
 
 
     public static function signup($username, $email, /*$phone,*/ $password)
@@ -291,5 +291,26 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $networks[] = Network::create($network, $identity);
         $this->networks = $networks;
+    }
+
+    public static function create($username, $email, /*$phone*/ $password)
+    {
+        $user = new User();
+        $user->username = $username;
+        $user->email = $email;
+        //$user->phone = $phone;
+        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
+        $user->created_at = time();
+        $user->status = self::STATUS_ACTIVE;
+        $user->auth_key = Yii::$app->security->generateRandomString();
+        return $user;
+    }
+
+    public function edit($username, $email/*, $phone*/)
+    {
+        $this->username = $username;
+        $this->email = $email;
+        //$this->phone = $phone;
+        $this->updated_at = time();
     }
 }

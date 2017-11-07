@@ -17,7 +17,7 @@ class UserCreateForm extends Model
     public function rules()
     {
         return [
-            [['username', 'email', 'phone', 'role'], 'required'],
+            [['username', 'email'/*, 'phone', 'role'*/], 'required'],
             ['email', 'email'],
             [['username', 'email'], 'string', 'max' => 255],
             [['username', 'email', 'phone'], 'unique', 'targetClass' => User::className()],
