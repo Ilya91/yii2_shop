@@ -55,6 +55,18 @@
             ]
         ) ?>
 
+        <?= dmstr\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Tools', 'options' => ['class' => 'header']],
+                    ['label' => 'Gii', 'icon' => 'cogs', 'url' => ['/gii']],
+                    ['label' => 'Debugger', 'icon' => 'bug', 'url' => ['/debug/default/index']],
+                    ['label' => 'Shop', 'icon' => 'caret-square-o-left', 'url' => ['yii2-shop']],
+                ],
+            ]
+        ) ?>
+
     </section>
 
 </aside>

@@ -23,13 +23,14 @@ class TagForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['name', 'slug'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
-            ['slug', SlugValidator::class],
-            [['name', 'slug'], 'unique', 'targetClass' => Tag::class, 'filter' => $this->_tag ? ['<>', 'id', $this->_tag->id] : null]
+            //['slug', SlugValidator::className()],
+            ['slug', 'match', 'pattern' => '#^[a-z0-9_-]*$#s'],
+            [['name', 'slug'], 'unique', 'targetClass' => Tag::className(), 'filter' => $this->_tag ? ['<>', 'id', $this->_tag->id] : null]
         ];
     }
 }
