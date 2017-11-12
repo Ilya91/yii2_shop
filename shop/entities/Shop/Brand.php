@@ -16,7 +16,7 @@ class Brand extends ActiveRecord
 {
     public $meta;
 
-    public static function create($name, $slug, Meta $meta): self
+    public static function create($name, $slug, Meta $meta)
     {
         $brand = new static();
         $brand->name = $name;
@@ -25,26 +25,26 @@ class Brand extends ActiveRecord
         return $brand;
     }
 
-    public function edit($name, $slug, Meta $meta): void
+    public function edit($name, $slug, Meta $meta)
     {
         $this->name = $name;
         $this->slug = $slug;
         $this->meta = $meta;
     }
 
-    public function getSeoTitle(): string
+    public function getSeoTitle()
     {
         return $this->meta->title ?: $this->name;
     }
 
     ##########################
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_brands}}';
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             MetaBehavior::className(),

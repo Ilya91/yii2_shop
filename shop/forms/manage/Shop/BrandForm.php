@@ -30,17 +30,17 @@ class BrandForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['name', 'slug'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
-            ['slug', SlugValidator::class],
-            [['name', 'slug'], 'unique', 'targetClass' => Brand::class, 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
+            ['slug', SlugValidator::className()],
+            [['name', 'slug'], 'unique', 'targetClass' => Brand::className(), 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
         ];
     }
 
-    public function internalForms(): array
+    public function internalForms()
     {
         return ['meta'];
     }
