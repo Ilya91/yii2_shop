@@ -19,7 +19,7 @@ class BrandManageService
         $this->products = $products;
     }
 
-    public function create(BrandForm $form): Brand
+    public function create(BrandForm $form)
     {
         $brand = Brand::create(
             $form->name,
@@ -34,7 +34,7 @@ class BrandManageService
         return $brand;
     }
 
-    public function edit($id, BrandForm $form): void
+    public function edit($id, BrandForm $form)
     {
         $brand = $this->brands->get($id);
         $brand->edit(
@@ -49,7 +49,7 @@ class BrandManageService
         $this->brands->save($brand);
     }
 
-    public function remove($id): void
+    public function remove($id)
     {
         $brand = $this->brands->get($id);
         if ($this->products->existsByBrand($brand->id)) {

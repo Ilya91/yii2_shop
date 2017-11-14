@@ -21,7 +21,7 @@ class MetaForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['title'], 'string', 'max' => 255],
