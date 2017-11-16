@@ -10,14 +10,14 @@ use shop\repositories\NotFoundException;
 
 class ProductRepository
 {
-    private $dispatcher;
+    /*private $dispatcher;
 
     public function __construct(EventDispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
-    }
+    }*/
 
-    public function get($id): Product
+    public function get($id)
     {
         if (!$product = Product::findOne($id)) {
             throw new NotFoundException('Product is not found.');
@@ -25,17 +25,17 @@ class ProductRepository
         return $product;
     }
 
-    public function existsByBrand($id): bool
+    public function existsByBrand($id)
     {
         return Product::find()->andWhere(['brand_id' => $id])->exists();
     }
 
-    public function existsByMainCategory($id): bool
+    public function existsByMainCategory($id)
     {
         return Product::find()->andWhere(['category_id' => $id])->exists();
     }
 
-    public function save(Product $product): void
+    public function save(Product $product)
     {
         if (!$product->save()) {
             throw new \RuntimeException('Saving error.');
@@ -44,7 +44,7 @@ class ProductRepository
         $this->dispatcher->dispatch(new EntityPersisted($product));
     }
 
-    public function remove(Product $product): void
+    public function remove(Product $product)
     {
         if (!$product->delete()) {
             throw new \RuntimeException('Removing error.');
