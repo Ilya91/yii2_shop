@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use shop\forms\manage\Shop\CategoryForm;
-use shop\useCases\manage\Shop\CategoryManageService;
+use shop\services\manage\Shop\CategoryManageService;
 use Yii;
 use shop\entities\Shop\Category;
 use backend\forms\Shop\CategorySearch;
@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -142,7 +142,7 @@ class CategoryController extends Controller
      * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Category
+    protected function findModel($id)
     {
         if (($model = Category::findOne($id)) !== null) {
             return $model;

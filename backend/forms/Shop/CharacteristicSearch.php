@@ -14,7 +14,7 @@ class CharacteristicSearch extends Model
     public $type;
     public $required;
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['id', 'type', 'required'], 'integer'],
@@ -26,7 +26,7 @@ class CharacteristicSearch extends Model
      * @param array $params
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params)
     {
         $query = Characteristic::find();
 
@@ -56,12 +56,12 @@ class CharacteristicSearch extends Model
         return $dataProvider;
     }
 
-    public function typesList(): array
+    public function typesList()
     {
         return CharacteristicHelper::typeList();
     }
 
-    public function requiredList(): array
+    public function requiredList()
     {
         return [
             1 => \Yii::$app->formatter->asBoolean(true),

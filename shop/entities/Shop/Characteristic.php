@@ -22,7 +22,7 @@ class Characteristic extends ActiveRecord
 
     public $variants;
 
-    public static function create($name, $type, $required, $default, array $variants, $sort): self
+    public static function create($name, $type, $required, $default, array $variants, $sort)
     {
         $object = new static();
         $object->name = $name;
@@ -34,7 +34,7 @@ class Characteristic extends ActiveRecord
         return $object;
     }
 
-    public function edit($name, $type, $required, $default, array $variants, $sort): void
+    public function edit($name, $type, $required, $default, array $variants, $sort)
     {
         $this->name = $name;
         $this->type = $type;
@@ -44,38 +44,38 @@ class Characteristic extends ActiveRecord
         $this->sort = $sort;
     }
 
-    public function isString(): bool
+    public function isString()
     {
         return $this->type === self::TYPE_STRING;
     }
 
-    public function isInteger(): bool
+    public function isInteger()
     {
         return $this->type === self::TYPE_INTEGER;
     }
 
-    public function isFloat(): bool
+    public function isFloat()
     {
         return $this->type === self::TYPE_FLOAT;
     }
 
-    public function isSelect(): bool
+    public function isSelect()
     {
         return count($this->variants) > 0;
     }
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_characteristics}}';
     }
 
-    public function afterFind(): void
+    public function afterFind()
     {
         $this->variants = array_filter(Json::decode($this->getAttribute('variants_json')));
         parent::afterFind();
     }
 
-    public function beforeSave($insert): bool
+    public function beforeSave($insert)
     {
         $this->setAttribute('variants_json', Json::encode(array_filter($this->variants)));
         return parent::beforeSave($insert);

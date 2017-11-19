@@ -37,7 +37,7 @@ class CategoryForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['name', 'slug'], 'required'],
@@ -49,14 +49,14 @@ class CategoryForm extends CompositeForm
         ];
     }
 
-    public function parentCategoriesList(): array
+    public function parentCategoriesList()
     {
         return ArrayHelper::map(Category::find()->orderBy('lft')->asArray()->all(), 'id', function (array $category) {
             return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth'] - 1) . ' ' : '') . $category['name'];
         });
     }
 
-    public function internalForms(): array
+    public function internalForms()
     {
         return ['meta'];
     }

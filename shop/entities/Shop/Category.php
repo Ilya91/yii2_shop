@@ -30,7 +30,7 @@ class Category extends ActiveRecord
 {
     public $meta;
 
-    public static function create($name, $slug, $title, $description, Meta $meta): self
+    public static function create($name, $slug, $title, $description, Meta $meta)
     {
         $category = new static();
         $category->name = $name;
@@ -41,7 +41,7 @@ class Category extends ActiveRecord
         return $category;
     }
 
-    public function edit($name, $slug, $title, $description, Meta $meta): void
+    public function edit($name, $slug, $title, $description, Meta $meta)
     {
         $this->name = $name;
         $this->slug = $slug;
@@ -50,22 +50,22 @@ class Category extends ActiveRecord
         $this->meta = $meta;
     }
 
-    public function getSeoTitle(): string
+    public function getSeoTitle()
     {
         return $this->meta->title ?: $this->getHeadingTile();
     }
 
-    public function getHeadingTile(): string
+    public function getHeadingTile()
     {
         return $this->title ?: $this->name;
     }
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_categories}}';
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             MetaBehavior::className(),
@@ -73,15 +73,15 @@ class Category extends ActiveRecord
         ];
     }
 
-    public function transactions(): array
+    public function transactions()
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
 
-    public static function find(): CategoryQuery
+    public static function find()
     {
-        return new CategoryQuery(static::class);
+        return new CategoryQuery(static::className());
     }
 }

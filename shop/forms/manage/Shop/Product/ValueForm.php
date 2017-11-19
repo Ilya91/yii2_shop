@@ -24,7 +24,7 @@ class ValueForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return array_filter([
             $this->_characteristic->required ? ['value', 'required'] : false,
@@ -35,19 +35,19 @@ class ValueForm extends Model
         ]);
     }
 
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'value' => $this->_characteristic->name,
         ];
     }
 
-    public function variantsList(): array
+    public function variantsList()
     {
         return $this->_characteristic->variants ? array_combine($this->_characteristic->variants, $this->_characteristic->variants) : [];
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->_characteristic->id;
     }

@@ -36,7 +36,7 @@ class CharacteristicForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['name', 'type', 'sort'], 'required'],
@@ -44,16 +44,16 @@ class CharacteristicForm extends Model
             [['default'], 'string', 'max' => 255],
             [['textVariants'], 'string'],
             [['sort'], 'integer'],
-            [['name'], 'unique', 'targetClass' => Characteristic::class, 'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null]
+            [['name'], 'unique', 'targetClass' => Characteristic::className(), 'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null]
         ];
     }
 
-    public function typesList(): array
+    public function typesList()
     {
         return CharacteristicHelper::typeList();
     }
 
-    public function getVariants(): array
+    public function getVariants()
     {
         return preg_split('#\s+#i', $this->textVariants);
     }

@@ -10,14 +10,14 @@ use shop\repositories\NotFoundException;
 
 class CategoryRepository
 {
-    private $dispatcher;
+    /*private $dispatcher;
 
     public function __construct(EventDispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
-    }
+    }*/
 
-    public function get($id): Category
+    public function get($id)
     {
         if (!$category = Category::findOne($id)) {
             throw new NotFoundException('Category is not found.');
@@ -25,7 +25,7 @@ class CategoryRepository
         return $category;
     }
 
-    public function save(Category $category): void
+    public function save(Category $category)
     {
         if (!$category->save()) {
             throw new \RuntimeException('Saving error.');
@@ -33,7 +33,7 @@ class CategoryRepository
         $this->dispatcher->dispatch(new EntityPersisted($category));
     }
 
-    public function remove(Category $category): void
+    public function remove(Category $category)
     {
         if (!$category->delete()) {
             throw new \RuntimeException('Removing error.');

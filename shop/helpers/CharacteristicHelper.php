@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 
 class CharacteristicHelper
 {
-    public static function typeList(): array
+    public static function typeList()
     {
         return [
             Characteristic::TYPE_STRING => 'String',
@@ -16,7 +16,7 @@ class CharacteristicHelper
         ];
     }
 
-    public static function typeName($type): string
+    public static function typeName($type)
     {
         return ArrayHelper::getValue(self::typeList(), $type);
     }

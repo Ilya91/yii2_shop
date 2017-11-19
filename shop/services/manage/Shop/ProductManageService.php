@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\useCases\manage\Shop;
+namespace shop\services\manage\Shop;
 
 use shop\entities\Meta;
 use shop\entities\Shop\Product\Product;
@@ -41,7 +41,7 @@ class ProductManageService
         $this->transaction = $transaction;
     }
 
-    public function create(ProductCreateForm $form): Product
+    public function create(ProductCreateForm $form)
     {
         $brand = $this->brands->get($form->brandId);
         $category = $this->categories->get($form->categories->main);
@@ -95,7 +95,7 @@ class ProductManageService
         return $product;
     }
 
-    public function edit($id, ProductEditForm $form): void
+    public function edit($id, ProductEditForm $form)
     {
         $product = $this->products->get($id);
         $brand = $this->brands->get($form->brandId);
@@ -146,35 +146,35 @@ class ProductManageService
         });
     }
 
-    public function changePrice($id, PriceForm $form): void
+    public function changePrice($id, PriceForm $form)
     {
         $product = $this->products->get($id);
         $product->setPrice($form->new, $form->old);
         $this->products->save($product);
     }
 
-    public function changeQuantity($id, QuantityForm $form): void
+    public function changeQuantity($id, QuantityForm $form)
     {
         $product = $this->products->get($id);
         $product->changeQuantity($form->quantity);
         $this->products->save($product);
     }
 
-    public function activate($id): void
+    public function activate($id)
     {
         $product = $this->products->get($id);
         $product->activate();
         $this->products->save($product);
     }
 
-    public function draft($id): void
+    public function draft($id)
     {
         $product = $this->products->get($id);
         $product->draft();
         $this->products->save($product);
     }
 
-    public function addPhotos($id, PhotosForm $form): void
+    public function addPhotos($id, PhotosForm $form)
     {
         $product = $this->products->get($id);
         foreach ($form->files as $file) {
@@ -183,28 +183,28 @@ class ProductManageService
         $this->products->save($product);
     }
 
-    public function movePhotoUp($id, $photoId): void
+    public function movePhotoUp($id, $photoId)
     {
         $product = $this->products->get($id);
         $product->movePhotoUp($photoId);
         $this->products->save($product);
     }
 
-    public function movePhotoDown($id, $photoId): void
+    public function movePhotoDown($id, $photoId)
     {
         $product = $this->products->get($id);
         $product->movePhotoDown($photoId);
         $this->products->save($product);
     }
 
-    public function removePhoto($id, $photoId): void
+    public function removePhoto($id, $photoId)
     {
         $product = $this->products->get($id);
         $product->removePhoto($photoId);
         $this->products->save($product);
     }
 
-    public function addRelatedProduct($id, $otherId): void
+    public function addRelatedProduct($id, $otherId)
     {
         $product = $this->products->get($id);
         $other = $this->products->get($otherId);
@@ -212,7 +212,7 @@ class ProductManageService
         $this->products->save($product);
     }
 
-    public function removeRelatedProduct($id, $otherId): void
+    public function removeRelatedProduct($id, $otherId)
     {
         $product = $this->products->get($id);
         $other = $this->products->get($otherId);
@@ -220,7 +220,7 @@ class ProductManageService
         $this->products->save($product);
     }
 
-    public function addModification($id, ModificationForm $form): void
+    public function addModification($id, ModificationForm $form)
     {
         $product = $this->products->get($id);
         $product->addModification(
@@ -232,7 +232,7 @@ class ProductManageService
         $this->products->save($product);
     }
 
-    public function editModification($id, $modificationId, ModificationForm $form): void
+    public function editModification($id, $modificationId, ModificationForm $form)
     {
         $product = $this->products->get($id);
         $product->editModification(
@@ -245,14 +245,14 @@ class ProductManageService
         $this->products->save($product);
     }
 
-    public function removeModification($id, $modificationId): void
+    public function removeModification($id, $modificationId)
     {
         $product = $this->products->get($id);
         $product->removeModification($modificationId);
         $this->products->save($product);
     }
 
-    public function remove($id): void
+    public function remove($id)
     {
         $product = $this->products->get($id);
         $this->products->remove($product);

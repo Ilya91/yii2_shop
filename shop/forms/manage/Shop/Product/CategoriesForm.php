@@ -21,14 +21,14 @@ class CategoriesForm extends Model
         parent::__construct($config);
     }
 
-    public function categoriesList(): array
+    public function categoriesList()
     {
         return ArrayHelper::map(Category::find()->andWhere(['>', 'depth', 0])->orderBy('lft')->asArray()->all(), 'id', function (array $category) {
             return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth'] - 1) . ' ' : '') . $category['name'];
         });
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             ['main', 'required'],
@@ -37,7 +37,7 @@ class CategoriesForm extends Model
         ];
     }
 
-    public function beforeValidate(): bool
+    public function beforeValidate()
     {
         $this->others = array_filter((array)$this->others);
         return parent::beforeValidate();

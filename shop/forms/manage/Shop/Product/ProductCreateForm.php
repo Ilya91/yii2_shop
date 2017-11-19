@@ -40,7 +40,7 @@ class ProductCreateForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['brandId', 'code', 'name', 'weight'], 'required'],
@@ -53,12 +53,12 @@ class ProductCreateForm extends CompositeForm
         ];
     }
 
-    public function brandsList(): array
+    public function brandsList()
     {
         return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
-    protected function internalForms(): array
+    protected function internalForms()
     {
         return ['price', 'quantity', 'meta', 'photos', 'categories', 'tags', 'values'];
     }

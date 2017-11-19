@@ -12,14 +12,14 @@ class PhotosForm extends Model
      */
     public $files;
 
-    public function rules(): array
+    public function rules()
     {
         return [
             ['files', 'each', 'rule' => ['image']],
         ];
     }
 
-    public function beforeValidate(): bool
+    public function beforeValidate()
     {
         if (parent::beforeValidate()) {
             $this->files = UploadedFile::getInstances($this, 'files');

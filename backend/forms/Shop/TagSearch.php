@@ -12,7 +12,7 @@ class TagSearch extends Model
     public $name;
     public $slug;
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['id'], 'integer'],
@@ -24,7 +24,7 @@ class TagSearch extends Model
      * @param array $params
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params)
     {
         $query = Tag::find();
 

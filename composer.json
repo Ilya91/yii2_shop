@@ -24,7 +24,9 @@
         "yiisoft/yii2-authclient": "~2.1.0",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-field-range": "*",
-        "codeception/codeception": "^2.3"
+        "codeception/codeception": "^2.3",
+        "paulzi/yii2-nested-sets": "^1.0",
+        "mihaildev/yii2-ckeditor": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

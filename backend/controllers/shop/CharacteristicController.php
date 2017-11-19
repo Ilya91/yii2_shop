@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use shop\forms\manage\Shop\CharacteristicForm;
-use shop\useCases\manage\Shop\CharacteristicManageService;
+use shop\services\manage\Shop\CharacteristicManageService;
 use Yii;
 use shop\entities\Shop\Characteristic;
 use backend\forms\Shop\CharacteristicSearch;
@@ -21,7 +21,7 @@ class CharacteristicController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -122,7 +122,7 @@ class CharacteristicController extends Controller
      * @return Characteristic the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Characteristic
+    protected function findModel($id)
     {
         if (($model = Characteristic::findOne($id)) !== null) {
             return $model;

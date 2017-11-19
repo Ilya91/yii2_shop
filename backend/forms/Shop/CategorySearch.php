@@ -13,7 +13,7 @@ class CategorySearch extends Model
     public $slug;
     public $title;
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['id'], 'integer'],
@@ -25,7 +25,7 @@ class CategorySearch extends Model
      * @param array $params
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params)
     {
         $query = Category::find()->andWhere(['>', 'depth', 0]);
 

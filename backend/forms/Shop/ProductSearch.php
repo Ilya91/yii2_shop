@@ -19,7 +19,7 @@ class ProductSearch extends Model
     public $quantity;
     public $status;
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['id', 'category_id', 'brand_id', 'status', 'quantity'], 'integer'],
@@ -31,7 +31,7 @@ class ProductSearch extends Model
      * @param array $params
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params)
     {
         $query = Product::find()->with('mainPhoto', 'category');
 
@@ -64,14 +64,14 @@ class ProductSearch extends Model
         return $dataProvider;
     }
 
-    public function categoriesList(): array
+    public function categoriesList()
     {
         return ArrayHelper::map(Category::find()->andWhere(['>', 'depth', 0])->orderBy('lft')->asArray()->all(), 'id', function (array $category) {
             return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth'] - 1) . ' ' : '') . $category['name'];
         });
     }
 
-    public function statusList(): array
+    public function statusList()
     {
         return ProductHelper::statusList();
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\useCases\manage\Shop;
+namespace shop\services\manage\Shop;
 
 use shop\entities\Meta;
 use shop\entities\Shop\Category;
@@ -19,7 +19,7 @@ class CategoryManageService
         $this->products = $products;
     }
 
-    public function create(CategoryForm $form): Category
+    public function create(CategoryForm $form)
     {
         $parent = $this->categories->get($form->parentId);
         $category = Category::create(
@@ -38,7 +38,7 @@ class CategoryManageService
         return $category;
     }
 
-    public function edit($id, CategoryForm $form): void
+    public function edit($id, CategoryForm $form)
     {
         $category = $this->categories->get($id);
         $this->assertIsNotRoot($category);
@@ -60,7 +60,7 @@ class CategoryManageService
         $this->categories->save($category);
     }
 
-    public function moveUp($id): void
+    public function moveUp($id)
     {
         $category = $this->categories->get($id);
         $this->assertIsNotRoot($category);
@@ -70,7 +70,7 @@ class CategoryManageService
         $this->categories->save($category);
     }
 
-    public function moveDown($id): void
+    public function moveDown($id)
     {
         $category = $this->categories->get($id);
         $this->assertIsNotRoot($category);
@@ -80,7 +80,7 @@ class CategoryManageService
         $this->categories->save($category);
     }
 
-    public function remove($id): void
+    public function remove($id)
     {
         $category = $this->categories->get($id);
         $this->assertIsNotRoot($category);
@@ -90,7 +90,7 @@ class CategoryManageService
         $this->categories->remove($category);
     }
 
-    private function assertIsNotRoot(Category $category): void
+    private function assertIsNotRoot(Category $category)
     {
         if ($category->isRoot()) {
             throw new \DomainException('Unable to manage the root category.');

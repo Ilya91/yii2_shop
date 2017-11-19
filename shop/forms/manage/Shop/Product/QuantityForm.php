@@ -17,7 +17,7 @@ class QuantityForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['quantity'], 'required'],

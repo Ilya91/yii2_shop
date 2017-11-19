@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use shop\forms\manage\Shop\TagForm;
-use shop\useCases\manage\Shop\TagManageService;
+use shop\services\manage\Shop\TagManageService;
 use Yii;
 use shop\entities\Shop\Tag;
 use backend\forms\Shop\TagSearch;
@@ -21,7 +21,7 @@ class TagController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -122,7 +122,7 @@ class TagController extends Controller
      * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Tag
+    protected function findModel($id)
     {
         if (($model = Tag::findOne($id)) !== null) {
             return $model;

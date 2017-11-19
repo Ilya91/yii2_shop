@@ -23,7 +23,7 @@ class TagsForm extends Model
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             ['existing', 'each', 'rule' => ['integer']],
@@ -31,17 +31,17 @@ class TagsForm extends Model
         ];
     }
 
-    public function tagsList(): array
+    public function tagsList()
     {
         return ArrayHelper::map(Tag::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
-    public function getNewNames(): array
+    public function getNewNames()
     {
         return array_map('trim', preg_split('#\s*,\s*#i', $this->textNew));
     }
 
-    public function beforeValidate(): bool
+    public function beforeValidate()
     {
         $this->existing = array_filter((array)$this->existing);
         return parent::beforeValidate();

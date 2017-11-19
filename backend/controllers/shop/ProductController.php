@@ -8,7 +8,7 @@ use shop\forms\manage\Shop\Product\PhotosForm;
 use shop\forms\manage\Shop\Product\PriceForm;
 use shop\forms\manage\Shop\Product\ProductCreateForm;
 use shop\forms\manage\Shop\Product\ProductEditForm;
-use shop\useCases\manage\Shop\ProductManageService;
+use shop\services\manage\Shop\ProductManageService;
 use Yii;
 use shop\entities\Shop\Product\Product;
 use backend\forms\Shop\ProductSearch;
@@ -27,7 +27,7 @@ class ProductController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -271,7 +271,7 @@ class ProductController extends Controller
      * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Product
+    protected function findModel($id)
     {
         if (($model = Product::findOne($id)) !== null) {
             return $model;

@@ -7,7 +7,7 @@ use shop\repositories\NotFoundException;
 
 class CharacteristicRepository
 {
-    public function get($id): Characteristic
+    public function get($id)
     {
         if (!$characteristic = Characteristic::findOne($id)) {
             throw new NotFoundException('Characteristic is not found.');
@@ -15,14 +15,14 @@ class CharacteristicRepository
         return $characteristic;
     }
 
-    public function save(Characteristic $characteristic): void
+    public function save(Characteristic $characteristic)
     {
         if (!$characteristic->save()) {
             throw new \RuntimeException('Saving error.');
         }
     }
 
-    public function remove(Characteristic $characteristic): void
+    public function remove(Characteristic $characteristic)
     {
         if (!$characteristic->delete()) {
             throw new \RuntimeException('Removing error.');

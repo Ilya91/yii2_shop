@@ -57,7 +57,7 @@ class Product extends ActiveRecord implements AggregateRoot
 
     public $meta;
 
-    public static function create($brandId, $categoryId, $code, $name, $description, $weight, $quantity, Meta $meta): self
+    public static function create($brandId, $categoryId, $code, $name, $description, $weight, $quantity, Meta $meta)
     {
         $product = new static();
         $product->brand_id = $brandId;
@@ -73,13 +73,13 @@ class Product extends ActiveRecord implements AggregateRoot
         return $product;
     }
 
-    public function setPrice($new, $old): void
+    public function setPrice($new, $old)
     {
         $this->price_new = $new;
         $this->price_old = $old;
     }
 
-    public function changeQuantity($quantity): void
+    public function changeQuantity($quantity)
     {
         if ($this->modifications) {
             throw new \DomainException('Change modifications quantity.');
@@ -87,7 +87,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->setQuantity($quantity);
     }
 
-    public function edit($brandId, $code, $name, $description, $weight, Meta $meta): void
+    public function edit($brandId, $code, $name, $description, $weight, Meta $meta)
     {
         $this->brand_id = $brandId;
         $this->code = $code;
@@ -97,12 +97,12 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->meta = $meta;
     }
 
-    public function changeMainCategory($categoryId): void
+    public function changeMainCategory($categoryId)
     {
         $this->category_id = $categoryId;
     }
 
-    public function activate(): void
+    public function activate()
     {
         if ($this->isActive()) {
             throw new \DomainException('Product is already active.');
@@ -110,7 +110,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->status = self::STATUS_ACTIVE;
     }
 
-    public function draft(): void
+    public function draft()
     {
         if ($this->isDraft()) {
             throw new \DomainException('Product is already draft.');
@@ -118,28 +118,28 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->status = self::STATUS_DRAFT;
     }
 
-    public function isActive(): bool
+    public function isActive()
     {
         return $this->status == self::STATUS_ACTIVE;
     }
 
 
-    public function isDraft(): bool
+    public function isDraft()
     {
         return $this->status == self::STATUS_DRAFT;
     }
 
-    public function isAvailable(): bool
+    public function isAvailable()
     {
         return $this->quantity > 0;
     }
 
-    public function canChangeQuantity(): bool
+    public function canChangeQuantity()
     {
         return !$this->modifications;
     }
 
-    public function canBeCheckout($modificationId, $quantity): bool
+    public function canBeCheckout($modificationId, $quantity)
     {
         if ($modificationId) {
             return $quantity <= $this->getModification($modificationId)->quantity;
@@ -147,7 +147,7 @@ class Product extends ActiveRecord implements AggregateRoot
         return $quantity <= $this->quantity;
     }
 
-    public function checkout($modificationId, $quantity): void
+    public function checkout($modificationId, $quantity)
     {
         if ($modificationId) {
             $modifications = $this->modifications;
@@ -165,7 +165,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->setQuantity($this->quantity - 1);
     }
 
-    private function setQuantity($quantity): void
+    private function setQuantity($quantity)
     {
         if ($this->quantity == 0 && $quantity > 0) {
             $this->recordEvent(new ProductAppearedInStock($this));
@@ -173,12 +173,12 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->quantity = $quantity;
     }
 
-    public function getSeoTile(): string
+    public function getSeoTile()
     {
         return $this->meta->title ?: $this->name;
     }
 
-    public function setValue($id, $value): void
+    public function setValue($id, $value)
     {
         $values = $this->values;
         foreach ($values as $val) {
@@ -192,7 +192,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->values = $values;
     }
 
-    public function getValue($id): Value
+    public function getValue($id)
     {
         $values = $this->values;
         foreach ($values as $val) {
@@ -205,7 +205,7 @@ class Product extends ActiveRecord implements AggregateRoot
 
     // Modification
 
-    public function getModification($id): Modification
+    public function getModification($id)
     {
         foreach ($this->modifications as $modification) {
             if ($modification->isIdEqualTo($id)) {
@@ -215,7 +215,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Modification is not found.');
     }
 
-    public function getModificationPrice($id): int
+    public function getModificationPrice($id)
     {
         foreach ($this->modifications as $modification) {
             if ($modification->isIdEqualTo($id)) {
@@ -225,7 +225,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Modification is not found.');
     }
 
-    public function addModification($code, $name, $price, $quantity): void
+    public function addModification($code, $name, $price, $quantity)
     {
         $modifications = $this->modifications;
         foreach ($modifications as $modification) {
@@ -237,7 +237,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->updateModifications($modifications);
     }
 
-    public function editModification($id, $code, $name, $price, $quantity): void
+    public function editModification($id, $code, $name, $price, $quantity)
     {
         $modifications = $this->modifications;
         foreach ($modifications as $i => $modification) {
@@ -250,7 +250,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Modification is not found.');
     }
 
-    public function removeModification($id): void
+    public function removeModification($id)
     {
         $modifications = $this->modifications;
         foreach ($modifications as $i => $modification) {
@@ -263,7 +263,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Modification is not found.');
     }
 
-    private function updateModifications(array $modifications): void
+    private function updateModifications(array $modifications)
     {
         $this->modifications = $modifications;
         $this->setQuantity(array_sum(array_map(function (Modification $modification) {
@@ -273,7 +273,7 @@ class Product extends ActiveRecord implements AggregateRoot
 
     // Categories
 
-    public function assignCategory($id): void
+    public function assignCategory($id)
     {
         $assignments = $this->categoryAssignments;
         foreach ($assignments as $assignment) {
@@ -285,7 +285,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->categoryAssignments = $assignments;
     }
 
-    public function revokeCategory($id): void
+    public function revokeCategory($id)
     {
         $assignments = $this->categoryAssignments;
         foreach ($assignments as $i => $assignment) {
@@ -298,14 +298,14 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Assignment is not found.');
     }
 
-    public function revokeCategories(): void
+    public function revokeCategories()
     {
         $this->categoryAssignments = [];
     }
 
     // Tags
 
-    public function assignTag($id): void
+    public function assignTag($id)
     {
         $assignments = $this->tagAssignments;
         foreach ($assignments as $assignment) {
@@ -317,7 +317,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->tagAssignments = $assignments;
     }
 
-    public function revokeTag($id): void
+    public function revokeTag($id)
     {
         $assignments = $this->tagAssignments;
         foreach ($assignments as $i => $assignment) {
@@ -330,21 +330,21 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Assignment is not found.');
     }
 
-    public function revokeTags(): void
+    public function revokeTags()
     {
         $this->tagAssignments = [];
     }
 
     // Photos
 
-    public function addPhoto(UploadedFile $file): void
+    public function addPhoto(UploadedFile $file)
     {
         $photos = $this->photos;
         $photos[] = Photo::create($file);
         $this->updatePhotos($photos);
     }
 
-    public function removePhoto($id): void
+    public function removePhoto($id)
     {
         $photos = $this->photos;
         foreach ($photos as $i => $photo) {
@@ -357,17 +357,17 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Photo is not found.');
     }
 
-    public function removePhotos(): void
+    public function removePhotos()
     {
         $this->updatePhotos([]);
     }
 
-    public function movePhotoUp($id): void
+    public function movePhotoUp($id)
     {
         $photos = $this->photos;
         foreach ($photos as $i => $photo) {
             if ($photo->isIdEqualTo($id)) {
-                if ($prev = $photos[$i - 1] ?? null) {
+                if ($prev = $photos[$i - 1] != null) { /// ??????????
                     $photos[$i - 1] = $photo;
                     $photos[$i] = $prev;
                     $this->updatePhotos($photos);
@@ -378,12 +378,12 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Photo is not found.');
     }
 
-    public function movePhotoDown($id): void
+    public function movePhotoDown($id)
     {
         $photos = $this->photos;
         foreach ($photos as $i => $photo) {
             if ($photo->isIdEqualTo($id)) {
-                if ($next = $photos[$i + 1] ?? null) {
+                if ($next = $photos[$i + 1] != null) { //?????????????
                     $photos[$i] = $next;
                     $photos[$i + 1] = $photo;
                     $this->updatePhotos($photos);
@@ -394,7 +394,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Photo is not found.');
     }
 
-    private function updatePhotos(array $photos): void
+    private function updatePhotos(array $photos)
     {
         foreach ($photos as $i => $photo) {
             $photo->setSort($i);
@@ -405,7 +405,7 @@ class Product extends ActiveRecord implements AggregateRoot
 
     // Related products
 
-    public function assignRelatedProduct($id): void
+    public function assignRelatedProduct($id)
     {
         $assignments = $this->relatedAssignments;
         foreach ($assignments as $assignment) {
@@ -417,7 +417,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $this->relatedAssignments = $assignments;
     }
 
-    public function revokeRelatedProduct($id): void
+    public function revokeRelatedProduct($id)
     {
         $assignments = $this->relatedAssignments;
         foreach ($assignments as $i => $assignment) {
@@ -432,35 +432,35 @@ class Product extends ActiveRecord implements AggregateRoot
 
     // Reviews
 
-    public function addReview($userId, $vote, $text): void
+    public function addReview($userId, $vote, $text)
     {
         $reviews = $this->reviews;
         $reviews[] = Review::create($userId, $vote, $text);
         $this->updateReviews($reviews);
     }
 
-    public function editReview($id, $vote, $text): void
+    public function editReview($id, $vote, $text)
     {
         $this->doWithReview($id, function (Review $review) use ($vote, $text) {
             $review->edit($vote, $text);
         });
     }
 
-    public function activateReview($id): void
+    public function activateReview($id)
     {
         $this->doWithReview($id, function (Review $review) {
             $review->activate();
         });
     }
 
-    public function draftReview($id): void
+    public function draftReview($id)
     {
         $this->doWithReview($id, function (Review $review) {
             $review->draft();
         });
     }
 
-    private function doWithReview($id, callable $callback): void
+    private function doWithReview($id, callable $callback)
     {
         $reviews = $this->reviews;
         foreach ($reviews as $review) {
@@ -473,7 +473,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Review is not found.');
     }
 
-    public function removeReview($id): void
+    public function removeReview($id)
     {
         $reviews = $this->reviews;
         foreach ($reviews as $i => $review) {
@@ -486,7 +486,7 @@ class Product extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Review is not found.');
     }
 
-    private function updateReviews(array $reviews): void
+    private function updateReviews(array $reviews)
     {
         $amount = 0;
         $total = 0;
@@ -504,84 +504,84 @@ class Product extends ActiveRecord implements AggregateRoot
 
     ##########################
 
-    public function getBrand(): ActiveQuery
+    public function getBrand()
     {
         return $this->hasOne(Brand::class, ['id' => 'brand_id']);
     }
 
-    public function getCategory(): ActiveQuery
+    public function getCategory()
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
-    public function getCategoryAssignments(): ActiveQuery
+    public function getCategoryAssignments()
     {
         return $this->hasMany(CategoryAssignment::class, ['product_id' => 'id']);
     }
 
-    public function getCategories(): ActiveQuery
+    public function getCategories()
     {
         return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignments');
     }
 
-    public function getTagAssignments(): ActiveQuery
+    public function getTagAssignments()
     {
         return $this->hasMany(TagAssignment::class, ['product_id' => 'id']);
     }
 
-    public function getTags(): ActiveQuery
+    public function getTags()
     {
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
     }
 
-    public function getModifications(): ActiveQuery
+    public function getModifications()
     {
         return $this->hasMany(Modification::class, ['product_id' => 'id']);
     }
 
-    public function getValues(): ActiveQuery
+    public function getValues()
     {
         return $this->hasMany(Value::class, ['product_id' => 'id']);
     }
 
-    public function getPhotos(): ActiveQuery
+    public function getPhotos()
     {
         return $this->hasMany(Photo::class, ['product_id' => 'id'])->orderBy('sort');
     }
 
-    public function getMainPhoto(): ActiveQuery
+    public function getMainPhoto()
     {
         return $this->hasOne(Photo::class, ['id' => 'main_photo_id']);
     }
 
-    public function getRelatedAssignments(): ActiveQuery
+    public function getRelatedAssignments()
     {
         return $this->hasMany(RelatedAssignment::class, ['product_id' => 'id']);
     }
 
-    public function getRelateds(): ActiveQuery
+    public function getRelateds()
     {
         return $this->hasMany(Product::class, ['id' => 'related_id'])->via('relatedAssignments');
     }
 
-    public function getReviews(): ActiveQuery
+    public function getReviews()
     {
         return $this->hasMany(Review::class, ['product_id' => 'id']);
     }
 
-    public function getWishlistItems(): ActiveQuery
+    public function getWishlistItems()
     {
         return $this->hasMany(WishlistItem::class, ['product_id' => 'id']);
     }
 
     ##########################
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_products}}';
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             MetaBehavior::className(),
@@ -599,7 +599,7 @@ class Product extends ActiveRecord implements AggregateRoot
         ];
     }
 
-    public function beforeDelete(): bool
+    public function beforeDelete()
     {
         if (parent::beforeDelete()) {
             foreach ($this->photos as $photo) {
@@ -610,7 +610,7 @@ class Product extends ActiveRecord implements AggregateRoot
         return false;
     }
 
-    public function afterSave($insert, $changedAttributes): void
+    public function afterSave($insert, $changedAttributes)
     {
         $related = $this->getRelatedRecords();
         parent::afterSave($insert, $changedAttributes);
@@ -619,7 +619,7 @@ class Product extends ActiveRecord implements AggregateRoot
         }
     }
 
-    public static function find(): ProductQuery
+    public static function find()
     {
         return new ProductQuery(static::class);
     }

@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 class ProductHelper
 {
-    public static function statusList(): array
+    public static function statusList()
     {
         return [
             Product::STATUS_DRAFT => 'Draft',
@@ -16,12 +16,12 @@ class ProductHelper
         ];
     }
 
-    public static function statusName($status): string
+    public static function statusName($status)
     {
         return ArrayHelper::getValue(self::statusList(), $status);
     }
 
-    public static function statusLabel($status): string
+    public static function statusLabel($status)
     {
         switch ($status) {
             case Product::STATUS_DRAFT:
