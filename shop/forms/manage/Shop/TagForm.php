@@ -13,6 +13,11 @@ class TagForm extends Model
 
     private $_tag;
 
+    /**
+     * TagForm constructor.
+     * @param Tag|null $tag
+     * @param array $config
+     */
     public function __construct(Tag $tag = null, $config = [])
     {
         if ($tag) {
@@ -23,6 +28,9 @@ class TagForm extends Model
         parent::__construct($config);
     }
 
+    /**
+     * @return array
+     */
     public function rules()
     {
         return [

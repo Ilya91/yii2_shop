@@ -11,6 +11,11 @@ use yii\db\ActiveRecord;
  */
 class Tag extends ActiveRecord
 {
+    /**
+     * @param $name
+     * @param $slug
+     * @return static
+     */
     public static function create($name, $slug)
     {
         $tag = new static();
@@ -19,12 +24,19 @@ class Tag extends ActiveRecord
         return $tag;
     }
 
+    /**
+     * @param $name
+     * @param $slug
+     */
     public function edit($name, $slug)
     {
         $this->name = $name;
         $this->slug = $slug;
     }
 
+    /**
+     * @return string
+     */
     public static function tableName()
     {
         return '{{%shop_tags}}';
