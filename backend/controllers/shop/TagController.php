@@ -90,6 +90,7 @@ class TagController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($tag->id, $form);
+	            Yii::$app->session->setFlash('success', 'Тэг был успешно обновлён!');
                 return $this->redirect(['view', 'id' => $tag->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -110,6 +111,7 @@ class TagController extends Controller
     {
         try {
             $this->service->remove($id);
+	        Yii::$app->session->setFlash('success', 'Тэг был успешно удалён!');
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());

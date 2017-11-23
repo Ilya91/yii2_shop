@@ -8,6 +8,11 @@ return [
     'bootstrap' => [
         'common\bootstrap\SetUp',
     ],
+    'modules' => [
+	    'noty' => [
+		    'class' => 'lo\modules\noty\Module',
+	    ],
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\MemCache',

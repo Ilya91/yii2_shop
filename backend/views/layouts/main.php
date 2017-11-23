@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use lo\modules\noty\Wrapper;
+
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -34,7 +36,13 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         ['directoryAsset' => $directoryAsset]
     )
     ?>
-
+<?= Wrapper::widget([
+	    'layerClass' => 'lo\modules\noty\layers\Toastr',
+	    'options' => [
+		    "closeButton" => true,
+	    ],
+    ]);
+?>
     <?= $this->render(
         'content.php',
         ['content' => $content, 'directoryAsset' => $directoryAsset]
