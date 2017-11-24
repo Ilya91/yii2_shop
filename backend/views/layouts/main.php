@@ -37,9 +37,17 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
     )
     ?>
 <?= Wrapper::widget([
-	    'layerClass' => 'lo\modules\noty\layers\Toastr',
+	    'layerClass' => 'lo\modules\noty\layers\BootstrapNotify',
+	    // default options
 	    'options' => [
-		    "closeButton" => true,
+		    'newest_on_top' => false,
+		    'showProgressbar' => false,
+		    'placement' => [
+			    'from' => 'top',
+			    'align' => 'right'
+		    ]
+
+		    // and more for this library here https://github.com/mouse0270/bootstrap-notify
 	    ],
     ]);
 ?>

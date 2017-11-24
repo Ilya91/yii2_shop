@@ -31,8 +31,9 @@ class TagSearch extends Model
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['name' => SORT_ASC]
-            ]
+                'defaultOrder' => ['name' => SORT_ASC],
+            ],
+            'pagination' => [ 'pageSize' => 2 ],
         ]);
 
         $this->load($params);

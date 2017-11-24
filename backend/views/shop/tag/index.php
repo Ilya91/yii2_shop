@@ -4,6 +4,7 @@ use shop\entities\Shop\Tag;
 use yii\grid\ActionColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Shop\TagSearch */
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box">
         <div class="box-body">
+	        <?php Pjax::begin(); ?>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -36,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => ActionColumn::class],
                 ],
             ]); ?>
+	        <?php Pjax::end(); ?>
         </div>
     </div>
 </div>
