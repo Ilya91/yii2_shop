@@ -33,7 +33,7 @@ class TagSearch extends Model
             'sort' => [
                 'defaultOrder' => ['name' => SORT_ASC],
             ],
-            'pagination' => [ 'pageSize' => 2 ],
+            'pagination' => [ 'pageSize' => 7 ],
         ]);
 
         $this->load($params);

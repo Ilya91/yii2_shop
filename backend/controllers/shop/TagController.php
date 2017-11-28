@@ -64,21 +64,44 @@ class TagController extends Controller
     public function actionCreate()
     {
         $form = new TagForm();
-        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+	    $request = Yii::$app->request;
+
+        if ($form->load($request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
 	            Yii::$app->session->setFlash('success', 'Tag was created successfully');
-                return $this->redirect(['index']);
+                //return $this->redirect(['index']);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
-        return $this->render('create', [
-            'model' => $form,
-        ]);
+	    return $this->renderAjax('partial/_form', [
+		    'model' => $form,
+	    ]);
     }
 
+
+	/**
+	 * @return mixed
+	 */
+	public function actionCreate2()
+	{
+		$form = new TagForm();
+		if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+			try {
+				$this->service->create($form);
+				Yii::$app->session->setFlash('success', 'Tag was created successfully');
+				return $this->redirect(['index']);
+			} catch (\DomainException $e) {
+				Yii::$app->errorHandler->logException($e);
+				Yii::$app->session->setFlash('error', $e->getMessage());
+			}
+		}
+		return $this->renderAjax('create', [
+			'model' => $form,
+		]);
+	}
     /**
      * @param integer $id
      * @return mixed
