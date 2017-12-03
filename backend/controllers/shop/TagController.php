@@ -10,6 +10,8 @@ use backend\forms\Shop\TagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class TagController extends Controller
 {
@@ -81,27 +83,25 @@ class TagController extends Controller
 	    ]);
     }
 
+    public function actionValidate()
+    {
+        $request = Yii::$app->request;
+        if($request->isAjax){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model = new TagForm();
+            $model->load($request->post());
+            return ActiveForm::validate($model);
+        }
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function actionCreate2()
-	{
-		$form = new TagForm();
-		if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-			try {
-				$this->service->create($form);
-				Yii::$app->session->setFlash('success', 'Tag was created successfully');
-				return $this->redirect(['index']);
-			} catch (\DomainException $e) {
-				Yii::$app->errorHandler->logException($e);
-				Yii::$app->session->setFlash('error', $e->getMessage());
-			}
-		}
-		return $this->renderAjax('create', [
-			'model' => $form,
-		]);
-	}
+    /*protected function actionValidate($model)
+    {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+    }*/
+
     /**
      * @param integer $id
      * @return mixed

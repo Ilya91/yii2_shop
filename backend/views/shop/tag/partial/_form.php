@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -33,6 +34,8 @@ $form = ActiveForm::begin([
     ],
     'method' => 'post',
     'enableClientValidation' => true,
+    'enableAjaxValidation' => true,
+    'validationUrl' => Url::to(['/shop/tag/validate']),
     'options' => [
         'data-pjax' => 1
     ]
