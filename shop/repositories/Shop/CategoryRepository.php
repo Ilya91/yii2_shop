@@ -10,9 +10,9 @@ use shop\repositories\NotFoundException;
 
 class CategoryRepository
 {
-    /*private $dispatcher;
+    private $dispatcher;
 
-    public function __construct(EventDispatcher $dispatcher)
+    /*public function __construct(EventDispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }*/

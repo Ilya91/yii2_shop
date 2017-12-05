@@ -17,7 +17,13 @@ class PriceForm extends Model
     public $old;
     public $new;
 
-    public function __construct(Product $product = null, $config = [])
+	/**
+	 * PriceForm constructor.
+	 *
+	 * @param Product|null $product
+	 * @param array $config
+	 */
+	public function __construct(Product $product = null, $config = [])
     {
         if ($product) {
             $this->new = $product->price_new;
@@ -26,7 +32,10 @@ class PriceForm extends Model
         parent::__construct($config);
     }
 
-    public function rules()
+	/**
+	 * @return array
+	 */
+	public function rules()
     {
         return [
             [['new'], 'required'],
