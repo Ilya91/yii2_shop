@@ -15,13 +15,13 @@ class ContactService
         $this->mailer = $mailer;
     }
 
-    /**
-     * Sends an email to the specified email address using the information collected by this model.
-     *
-     * @param object $form
-     * @param string $email the target email address
-     * @return bool whether the email was sent
-     */
+	/**
+	 * Sends an email to the specified email address using the information collected by this model.
+	 *
+	 * @param ContactForm $form
+	 *
+	 * @return void whether the email was sent
+	 */
     public function send(ContactForm $form)
     {
         $sent =  $this->mailer->compose()
