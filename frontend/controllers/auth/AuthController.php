@@ -24,7 +24,8 @@ class AuthController extends Controller
 	public function actionLogin()
 	{
 		if (!Yii::$app->user->isGuest) {
-			return $this->goHome();
+			//return $this->goHome();
+            return Yii::$app->getResponse()->redirect('/cabinet/default/index');
 		}
 
 		$model = new LoginForm();
@@ -32,7 +33,8 @@ class AuthController extends Controller
 			try{
 				$user = $this->service->auth($model);
 				Yii::$app->user->login($user, $model->rememberMe ? 3600 * 24 * 30 : 0);
-				return $this->goBack();
+                return Yii::$app->getResponse()->redirect('/cabinet/default/index');
+				//return $this->goBack();
 			}catch (\DomainException $e){
 				Yii::$app->session->setFlash('error', $e->getMessage());
 			}
@@ -51,6 +53,6 @@ class AuthController extends Controller
 	{
 		Yii::$app->user->logout();
 
-		return $this->goHome();
+        return Yii::$app->getResponse()->redirect('/auth/auth/login');
 	}
 }
