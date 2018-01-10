@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
         //var_dump(Yii::$app->params);
         //var_dump(Yii::$container);
         //var_dump(Yii::$app->urlManager);
-    $user = \common\models\User::findOne(['id' => 12]);
+    $user = \common\models\User::findOne(['id' => 1]);
     //$user->getNetworks();
-    var_dump($user->networks);
+    var_dump($user);
 
     ?>
 

@@ -41,10 +41,10 @@ class SignupController extends Controller
 	 */
 	public function actionSignup()
 	{
-		$model = new SignupForm();
-		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+		$form = new SignupForm();
+		if ($form->load(Yii::$app->request->post()) && $form->validate()) {
 			try{
-				$this->service->signup($model);
+				$this->service->signup($form);
 				Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 				return $this->goHome();
 			}catch (\DomainException $e){
@@ -55,7 +55,7 @@ class SignupController extends Controller
 		}
 
 		return $this->render('signup', [
-			'model' => $model,
+			'model' => $form,
 		]);
 	}
 

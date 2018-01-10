@@ -12,6 +12,8 @@ use yii\helpers\Json;
  * @property string $name
  * @property string $slug
  * @property Meta $meta
+ * @property string $seoTitle
+ * @property string $meta_json [varchar(255)]
  */
 class Brand extends ActiveRecord
 {
