@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  */
 class Modification extends ActiveRecord
 {
-    public static function create($code, $name, $price, $quantity): self
+    public static function create($code, $name, $price, $quantity)
     {
         $modification = new static();
         $modification->code = $code;
@@ -23,7 +23,7 @@ class Modification extends ActiveRecord
         return $modification;
     }
 
-    public function edit($code, $name, $price, $quantity): void
+    public function edit($code, $name, $price, $quantity)
     {
         $this->code = $code;
         $this->name = $name;
@@ -31,7 +31,7 @@ class Modification extends ActiveRecord
         $this->quantity = $quantity;
     }
 
-    public function checkout($quantity): void
+    public function checkout($quantity)
     {
         if ($quantity > $this->quantity) {
             throw new \DomainException('Only ' . $this->quantity . ' items are available.');
@@ -49,7 +49,7 @@ class Modification extends ActiveRecord
         return $this->code === $code;
     }
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_modifications}}';
     }

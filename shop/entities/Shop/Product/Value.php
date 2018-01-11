@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  */
 class Value extends ActiveRecord
 {
-    public static function create($characteristicId, $value): self
+    public static function create($characteristicId, $value)
     {
         $object = new static();
         $object->characteristic_id = $characteristicId;
@@ -22,29 +22,29 @@ class Value extends ActiveRecord
         return $object;
     }
 
-    public static function blank($characteristicId): self
+    public static function blank($characteristicId)
     {
         $object = new static();
         $object->characteristic_id = $characteristicId;
         return $object;
     }
 
-    public function change($value): void
+    public function change($value)
     {
         $this->value = $value;
     }
 
-    public function isForCharacteristic($id): bool
+    public function isForCharacteristic($id)
     {
         return $this->characteristic_id == $id;
     }
 
-    public function getCharacteristic(): ActiveQuery
+    public function getCharacteristic()
     {
-        return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
+        return $this->hasOne(Characteristic::className(), ['id' => 'characteristic_id']);
     }
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_values}}';
     }

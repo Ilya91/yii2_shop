@@ -42,24 +42,24 @@ class ProductEditForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             [['brandId', 'code', 'name', 'weight'], 'required'],
             [['brandId'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
-            [['code'], 'unique', 'targetClass' => Product::class, 'filter' => $this->_product ? ['<>', 'id', $this->_product->id] : null],
+            [['code'], 'unique', 'targetClass' => Product::className(), 'filter' => $this->_product ? ['<>', 'id', $this->_product->id] : null],
             ['description', 'string'],
             ['weight', 'integer', 'min' => 0],
         ];
     }
 
-    public function brandsList(): array
+    public function brandsList()
     {
         return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
-    protected function internalForms(): array
+    protected function internalForms()
     {
         return ['meta', 'categories', 'tags', 'values'];
     }

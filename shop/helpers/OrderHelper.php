@@ -21,12 +21,12 @@ class OrderHelper
         ];
     }
 
-    public static function statusName($status): string
+    public static function statusName($status)
     {
         return ArrayHelper::getValue(self::statusList(), $status);
     }
 
-    public static function statusLabel($status): string
+    public static function statusLabel($status)
     {
         switch ($status) {
             case Product::STATUS_DRAFT:

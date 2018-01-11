@@ -46,7 +46,7 @@ class ProductCreateForm extends CompositeForm
             [['brandId', 'code', 'name', 'weight'], 'required'],
             [['code', 'name'], 'string', 'max' => 255],
             [['brandId'], 'integer'],
-            [['code'], 'unique', 'targetClass' => Product::class],
+            [['code'], 'unique', 'targetClass' => Product::className()],
             ['description', 'string'],
             ['description', 'string'],
             ['weight', 'integer', 'min' => 0],

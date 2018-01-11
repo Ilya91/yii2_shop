@@ -16,29 +16,29 @@ use yiidreamteam\upload\ImageUploadBehavior;
  */
 class Photo extends ActiveRecord
 {
-    public static function create(UploadedFile $file): self
+    public static function create(UploadedFile $file)
     {
         $photo = new static();
         $photo->file = $file;
         return $photo;
     }
 
-    public function setSort($sort): void
+    public function setSort($sort)
     {
         $this->sort = $sort;
     }
 
-    public function isIdEqualTo($id): bool
+    public function isIdEqualTo($id)
     {
         return $this->id == $id;
     }
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return '{{%shop_photos}}';
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             [
