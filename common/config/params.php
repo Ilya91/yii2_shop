@@ -7,7 +7,7 @@ return [
     'frontendHostInfo' => 'http://elisdnshop',
     'backendHostInfo' => 'http://backend.example.com',
     'staticHostInfo' => 'http://static.example.com',
-    //'staticPath' => dirname(__DIR__, 2) . '/static',
+    'staticPath' => dirname(__DIR__) . '/static',
     'mailChimpKey' => '',
     'mailChimpListId' => '',
     'smsRuKey' => '',

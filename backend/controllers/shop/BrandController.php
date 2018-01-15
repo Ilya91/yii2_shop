@@ -64,6 +64,7 @@ class BrandController extends Controller
     public function actionCreate()
     {
         $form = new BrandForm();
+        var_dump($form);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $brand = $this->service->create($form);
@@ -81,6 +82,7 @@ class BrandController extends Controller
     /**
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {

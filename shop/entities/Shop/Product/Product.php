@@ -46,6 +46,11 @@ use yii\web\UploadedFile;
  * @property Value[] $values
  * @property Photo[] $photos
  * @property Photo $mainPhoto
+ * @property mixed $value
+ * @property mixed $relateds
+ * @property mixed $price
+ * @property mixed $wishlistItems
+ * @property string $seoTile
  * @property Review[] $reviews
  */
 class Product extends ActiveRecord implements AggregateRoot
@@ -541,12 +546,12 @@ class Product extends ActiveRecord implements AggregateRoot
 
     public function getValues()
     {
-        return $this->hasMany(Value::class, ['product_id' => 'id']);
+        return $this->hasMany(Value::className(), ['product_id' => 'id']);
     }
 
     public function getPhotos()
     {
-        return $this->hasMany(Photo::class, ['product_id' => 'id'])->orderBy('sort');
+        return $this->hasMany(Photo::className(), ['product_id' => 'id'])->orderBy('sort');
     }
 
     public function getMainPhoto()
@@ -621,6 +626,6 @@ class Product extends ActiveRecord implements AggregateRoot
 
     public static function find()
     {
-        return new ProductQuery(static::class);
+        return new ProductQuery(static::className());
     }
 }
