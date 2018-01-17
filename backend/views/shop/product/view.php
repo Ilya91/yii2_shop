@@ -11,7 +11,9 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\DetailView;
+use \backend\assets\LightboxAsset;
 
 /* @var $this yii\web\View */
 /* @var $product shop\entities\Shop\Product\Product */
@@ -21,6 +23,7 @@ use yii\widgets\DetailView;
 $this->title = $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+LightboxAsset::register($this);
 ?>
 <div class="user-view">
 
@@ -207,7 +210,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?= Html::a(
                                 Html::img($photo->getThumbFileUrl('file', 'thumb')),
                                 $photo->getUploadedFileUrl('file'),
-                                ['class' => 'thumbnail', 'target' => '_blank']
+                                    [
+                                        'class' => 'thumbnail',
+                                        'data-fancybox' => 'data-fancybox',
+                                    ]
                             ) ?>
                         </div>
                     </div>
@@ -218,7 +224,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['enctype'=>'multipart/form-data'],
             ]); ?>
 
-            <?= $form->field($photosForm, 'files[]')->label(false)->widget(FileInput::class, [
+            <?= $form->field($photosForm, 'files[]')->label(false)->widget(FileInput::className(), [
                 'options' => [
                     'accept' => 'image/*',
                     'multiple' => true,
