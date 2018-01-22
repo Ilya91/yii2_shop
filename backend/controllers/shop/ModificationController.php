@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use shop\forms\manage\Shop\Product\ModificationForm;
-use shop\useCases\manage\Shop\ProductManageService;
+use shop\services\manage\Shop\ProductManageService;
 use Yii;
 use shop\entities\Shop\Product\Product;
 use yii\web\Controller;
@@ -20,7 +20,7 @@ class ModificationController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -112,7 +112,7 @@ class ModificationController extends Controller
      * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Product
+    protected function findModel($id)
     {
         if (($model = Product::findOne($id)) !== null) {
             return $model;

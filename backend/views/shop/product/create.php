@@ -4,6 +4,7 @@ use kartik\widgets\FileInput;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\widgets\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model shop\forms\manage\Shop\Product\ProductCreateForm */
@@ -78,8 +79,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box box-default">
                 <div class="box-header with-border">Tags</div>
                 <div class="box-body">
-                    <?= $form->field($model->tags, 'existing')->checkboxList($model->tags->tagsList()) ?>
-                    <?= $form->field($model->tags, 'textNew')->textInput() ?>
+                    <?/*= $form->field($model->tags, 'existing')->checkboxList($model->tags->tagsList()) */?><!--
+                    --><?/*= $form->field($model->tags, 'textNew')->textInput() */?>
+
+                    <?=
+                    $form->field($model->tags, 'existing')->widget(Select2::classname(), [
+                        'data' => $model->tags->tagsList(),
+                        'options' => ['placeholder' => 'Select a tag ...', 'multiple' => true],
+                        'pluginOptions' => [
+                            'tags' => true,
+                            'tokenSeparators' => [',', ' '],
+                            'maximumInputLength' => 10
+                        ],
+                    ]);
+                    ?>
                 </div>
             </div>
         </div>
@@ -101,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-default">
         <div class="box-header with-border">Photos</div>
         <div class="box-body">
-            <?= $form->field($model->photos, 'files[]')->widget(FileInput::class, [
+            <?= $form->field($model->photos, 'files[]')->widget(FileInput::className(), [
                 'options' => [
                     'accept' => 'image/*',
                     'multiple' => true,

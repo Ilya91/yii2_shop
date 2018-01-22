@@ -3,6 +3,7 @@
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\widgets\Select2;
 
 /* @var $this yii\web\View */
 /* @var $product shop\entities\Shop\Product\Product */
@@ -56,8 +57,20 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="box box-default">
                 <div class="box-header with-border">Tags</div>
                 <div class="box-body">
-                    <?= $form->field($model->tags, 'existing')->checkboxList($model->tags->tagsList()) ?>
-                    <?= $form->field($model->tags, 'textNew')->textInput() ?>
+                    <?/*= $form->field($model->tags, 'existing')->checkboxList($model->tags->tagsList()) */?><!--
+                    --><?/*= $form->field($model->tags, 'textNew')->textInput() */?>
+
+                    <?=
+                    $form->field($model->tags, 'existing')->widget(Select2::classname(), [
+                        'data' => $model->tags->tagsList(),
+                        'options' => ['placeholder' => 'Select a tag ...', 'multiple' => true],
+                        'pluginOptions' => [
+                            'tags' => true,
+                            'tokenSeparators' => [',', ' '],
+                            'maximumInputLength' => 10
+                        ],
+                    ]);
+                    ?>
                 </div>
             </div>
         </div>
