@@ -22,9 +22,9 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
     <?= Html::csrfMetaTags() ?>
     <!--[if IE 9]>
-    <link href="css/ie9.css" rel="stylesheet" type="text/css" />
+    <link href="/css/ie9.css" rel="stylesheet" type="text/css" />
     <![endif]-->
-    <link rel="shortcut icon" href="img/favicon-6.ico" />
+    <link rel="shortcut icon" href="/img/favicon-6.ico" />
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -49,7 +49,7 @@ AppAsset::register($this);
 
                 <div class="header-product">
                     <div class="logo-wrapper">
-                        <a href="#" id="logo"><img alt="" src="img/logo-9.png"></a>
+                        <a href="/" id="logo"><img alt="" src="/img/logo-9.png"></a>
                     </div>
                     <div class="product-header-message">
                         FREE SHIPPING ON ALL UK ORDERS this week
@@ -61,13 +61,23 @@ AppAsset::register($this);
                                 <div class="title"><i class="fa fa-search"></i> <span>Search</span></div>
                             </div>
                             <div class="header-top-entry increase-icon-responsive">
-                                <div class="title"><i class="fa fa-user"></i> <span>My Account</span></div>
+                                <div class="title">
+                                    <?php if (Yii::$app->user->isGuest):?>
+                                        <a href="/auth/auth/login">
+                                            <i class="fa fa-user"></i> <span>My Account</span>
+                                        </a>
+                                    <?php else:?>
+                                        <a href="/cabinet/default/index">
+                                            <i class="fa fa-user"></i> <span><?= Yii::$app->user->identity->username?></span>
+                                        </a>
+                                    <?php endif;?>
+                                </div>
                             </div>
                             <div class="header-top-entry">
-                                <div class="title"><img alt="" src="img/flag-lang-1.png">English<i class="fa fa-caret-down"></i></div>
+                                <div class="title"><img alt="" src="/img/flag-lang-1.png">English<i class="fa fa-caret-down"></i></div>
                                 <div class="list">
-                                    <a class="list-entry" href="#"><img alt="" src="img/flag-lang-2.png">French</a>
-                                    <a class="list-entry" href="#"><img alt="" src="img/flag-lang-3.png">Spanish</a>
+                                    <a class="list-entry" href="#"><img alt="" src="/img/flag-lang-2.png">French</a>
+                                    <a class="list-entry" href="#"><img alt="" src="/img/flag-lang-3.png">Spanish</a>
                                 </div>
                             </div>
                             <div class="header-top-entry">
@@ -413,7 +423,6 @@ AppAsset::register($this);
                             </ul>
 
                             <ul>
-                                <li><a href="#">Buy this theme</a></li>
                                 <li class="fixed-header-visible">
                                     <a class="fixed-header-square-button open-cart-popup"><i class="fa fa-shopping-cart"></i></a>
                                     <a class="fixed-header-square-button open-search-popup"><i class="fa fa-search"></i></a>
@@ -443,759 +452,14 @@ AppAsset::register($this);
         </div>
 
         <div class="content-push">
-
-            <div class="parallax-slide fullwidth-block small-slide" style="margin-bottom: 30px; margin-top: -25px;">
-                <div class="swiper-container" data-autoplay="5000" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="1">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide no-shadow active" data-val="0" style="background-image: url(img/fullwidth-1.jpg);">
-                            <div class="parallax-vertical-align">
-                                <div class="parallax-article left-align">
-                                    <h2 class="subtitle">Check out this weekend</h2>
-                                    <h1 class="title">Big sale</h1>
-                                    <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</div>
-                                    <div class="info">
-                                        <a href="#" class="button style-8">shop now</a>
-                                        <a href="#" class="button style-8">features</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide no-shadow" data-val="1" style="background-image: url(img/fullwidth-2.jpg);">
-                            <div class="parallax-vertical-align">
-                                <div class="parallax-article left-align">
-                                    <h2 class="subtitle">Check out this weekend</h2>
-                                    <h1 class="title">Big sale</h1>
-                                    <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</div>
-                                    <div class="info">
-                                        <a href="#" class="button style-8">shop now</a>
-                                        <a href="#" class="button style-8">features</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pagination"></div>
-                </div>
-            </div>
-
-            <div class="information-blocks">
-                <div class="row">
-                    <div class="col-sm-4 information-entry">
-                        <div class="special-item-entry">
-                            <img src="img/special-item-1.jpg" alt="" />
-                            <h3 class="title">Check out this weekend <span>Jackets</span></h3>
-                            <a class="button style-6" href="#">shop now</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 information-entry">
-                        <div class="special-item-entry">
-                            <img src="img/special-item-2.jpg" alt="" />
-                            <h3 class="title">Check out this weekend <span>Jackets</span></h3>
-                            <a class="button style-6" href="#">shop now</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 information-entry">
-                        <div class="special-item-entry">
-                            <img src="img/special-item-3.jpg" alt="" />
-                            <h3 class="title">Check out this weekend <span>Jackets</span></h3>
-                            <a class="button style-6" href="#">shop now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="information-blocks">
-                <div class="tabs-container">
-                    <div class="swiper-tabs tabs-switch">
-                        <div class="title">Products</div>
-                        <div class="list">
-                            <a class="block-title tab-switcher active">Featured Products</a>
-                            <a class="block-title tab-switcher">Popular Products</a>
-                            <a class="block-title tab-switcher">New Arrivals</a>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="tabs-entry">
-                            <div class="products-swiper">
-                                <div class="swiper-container" data-autoplay="0" data-loop="0" data-speed="500" data-center="0" data-slides-per-view="responsive" data-xs-slides="2" data-int-slides="2" data-sm-slides="3" data-md-slides="4" data-lg-slides="5" data-add-slides="5">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-1.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
-                                                        <a class="top-line-a right"><i class="fa fa-heart"></i></a>
-                                                        <div class="bottom-line">
-                                                            <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-2.jpg" alt="" />
-                                                        <img src="img/product-minimal-12.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-3.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <div class="bottom-line left-attached">
-                                                            <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                            <a class="bottom-line-a square open-product"><i class="fa fa-expand"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-4.jpg" alt="" />
-                                                        <img src="img/product-minimal-12.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-5.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tabs-entry">
-                            <div class="products-swiper">
-                                <div class="swiper-container" data-autoplay="0" data-loop="0" data-speed="500" data-center="0" data-slides-per-view="responsive" data-xs-slides="2" data-int-slides="2" data-sm-slides="3" data-md-slides="4" data-lg-slides="5" data-add-slides="5">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-6.jpg" alt="" />
-                                                        <img src="img/product-minimal-12.jpg" alt="" />
-                                                        <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
-                                                        <a class="top-line-a right"><i class="fa fa-heart"></i></a>
-                                                        <div class="bottom-line">
-                                                            <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-7.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-8.jpg" alt="" />
-                                                        <img src="img/product-minimal-12.jpg" alt="" />
-                                                        <div class="bottom-line left-attached">
-                                                            <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                            <a class="bottom-line-a square open-product"><i class="fa fa-expand"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-9.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-10.jpg" alt="" />
-                                                        <img src="img/product-minimal-12.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tabs-entry">
-                            <div class="products-swiper">
-                                <div class="swiper-container" data-autoplay="0" data-loop="0" data-speed="500" data-center="0" data-slides-per-view="responsive" data-xs-slides="2" data-int-slides="2" data-sm-slides="3" data-md-slides="4" data-lg-slides="5" data-add-slides="5">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-1.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
-                                                        <a class="top-line-a right"><i class="fa fa-heart"></i></a>
-                                                        <div class="bottom-line">
-                                                            <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-3.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-5.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <div class="bottom-line left-attached">
-                                                            <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                            <a class="bottom-line-a square open-product"><i class="fa fa-expand"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-7.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="paddings-container">
-                                                <div class="product-slide-entry shift-image">
-                                                    <div class="product-image">
-                                                        <img src="img/product-minimal-9.jpg" alt="" />
-                                                        <img src="img/product-minimal-11.jpg" alt="" />
-                                                        <a class="top-line-a right open-product"><i class="fa fa-expand"></i> <span>Quick View</span></a>
-                                                        <div class="bottom-line">
-                                                            <div class="right-align">
-                                                                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                            <div class="left-align">
-                                                                <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a class="tag" href="#">Men clothing</a>
-                                                    <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
-                                                    <div class="rating-box">
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                        <div class="star"><i class="fa fa-star"></i></div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="prev">$199,99</div>
-                                                        <div class="current">$119,99</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="information-blocks">
-                <div class="row">
-                    <div class="information-entry col-md-6">
-                        <div class="image-text-widget" style="background-image: url(img/image-text-widget-1.jpg);">
-                            <div class="hot-mark red">hot</div>
-                            <h3 class="title">Woman category</h3>
-                            <div class="article-container style-1">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore consectetur.</p>
-                                <ul>
-                                    <li><a href="#">Evening dresses</a></li>
-                                    <li><a href="#">Jackets and coats</a></li>
-                                    <li><a href="#">Tops and Sweatshirts</a></li>
-                                    <li><a href="#">Blouses and shirts</a></li>
-                                    <li><a href="#">Trousers and Shorts</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="information-entry col-md-6">
-                        <div class="image-text-widget" style="background-image: url(img/image-text-widget-2.jpg);">
-                            <div class="hot-mark red">hot</div>
-                            <h3 class="title">Man category</h3>
-                            <div class="article-container style-1">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore consectetur.</p>
-                                <ul>
-                                    <li><a href="#">Evening dresses</a></li>
-                                    <li><a href="#">Jackets and coats</a></li>
-                                    <li><a href="#">Tops and Sweatshirts</a></li>
-                                    <li><a href="#">Blouses and shirts</a></li>
-                                    <li><a href="#">Trousers and Shorts</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="information-blocks">
-                <div class="row">
-                    <div class="col-sm-4 information-entry">
-                        <h3 class="block-title inline-product-column-title">Featured products</h3>
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 information-entry">
-                        <h3 class="block-title inline-product-column-title">Featured products</h3>
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 information-entry">
-                        <h3 class="block-title inline-product-column-title">Featured products</h3>
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="inline-product-entry">
-                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
-                            <div class="content">
-                                <div class="cell-view">
-                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
-                                    <div class="price">
-                                        <div class="prev">$199,99</div>
-                                        <div class="current">$119,99</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+	        <?= $content ?>
             <!-- FOOTER -->
             <div class="footer-wrapper style-10">
                 <footer class="type-1">
                     <div class="footer-columns-entry">
                         <div class="row">
                             <div class="col-md-3">
-                                <img class="footer-logo" src="img/logo-9.png" alt="" />
+                                <img class="footer-logo" src="/img/logo-9.png" alt="" />
                                 <div class="footer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</div>
                                 <div class="footer-address">30 South Avenue San Francisco<br/>
                                     Phone: +78 123 456 789<br/>
@@ -1270,12 +534,12 @@ AppAsset::register($this);
                         </div>
                         <div class="cell-view">
                             <div class="payment-methods">
-                                <a href="#"><img src="img/payment-method-1.png" alt="" /></a>
-                                <a href="#"><img src="img/payment-method-2.png" alt="" /></a>
-                                <a href="#"><img src="img/payment-method-3.png" alt="" /></a>
-                                <a href="#"><img src="img/payment-method-4.png" alt="" /></a>
-                                <a href="#"><img src="img/payment-method-5.png" alt="" /></a>
-                                <a href="#"><img src="img/payment-method-6.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-1.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-2.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-3.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-4.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-5.png" alt="" /></a>
+                                <a href="#"><img src="/img/payment-method-6.png" alt="" /></a>
                             </div>
                         </div>
                     </div>
@@ -1319,7 +583,7 @@ AppAsset::register($this);
 <div class="cart-box popup">
     <div class="popup-container">
         <div class="cart-entry">
-            <a class="image"><img src="img/product-menu-1.jpg" alt="" /></a>
+            <a class="image"><img src="/img/product-menu-1.jpg" alt="" /></a>
             <div class="content">
                 <a class="title" href="#">Pullover Batwing Sleeve Zigzag</a>
                 <div class="quantity">Quantity: 4</div>
@@ -1328,7 +592,7 @@ AppAsset::register($this);
             <div class="button-x"><i class="fa fa-close"></i></div>
         </div>
         <div class="cart-entry">
-            <a class="image"><img src="img/product-menu-1_.jpg" alt="" /></a>
+            <a class="image"><img src="/img/product-menu-1_.jpg" alt="" /></a>
             <div class="content">
                 <a class="title" href="#">Pullover Batwing Sleeve Zigzag</a>
                 <div class="quantity">Quantity: 4</div>
@@ -1367,30 +631,30 @@ AppAsset::register($this);
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <div class="product-zoom-image">
-                                                <img src="img/product-main-1.jpg" alt="" data-zoom="img/product-main-1-zoom.jpg" />
+                                                <img src="/img/product-main-1.jpg" alt="" data-zoom="/img/product-main-1-zoom.jpg" />
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="product-zoom-image">
-                                                <img src="img/product-main-2.jpg" alt="" data-zoom="img/product-main-2-zoom.jpg" />
+                                                <img src="/img/product-main-2.jpg" alt="" data-zoom="/img/product-main-2-zoom.jpg" />
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="product-zoom-image">
-                                                <img src="img/product-main-3.jpg" alt="" data-zoom="img/product-main-3-zoom.jpg" />
+                                                <img src="/img/product-main-3.jpg" alt="" data-zoom="/img/product-main-3-zoom.jpg" />
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="product-zoom-image">
-                                                <img src="img/product-main-4.jpg" alt="" data-zoom="img/product-main-4-zoom.jpg" />
+                                                <img src="/img/product-main-4.jpg" alt="" data-zoom="/img/product-main-4-zoom.jpg" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="pagination"></div>
                                     <div class="product-zoom-container">
                                         <div class="move-box">
-                                            <img class="default-image" src="img/product-main-1.jpg" alt="" />
-                                            <img class="zoomed-image" src="img/product-main-1-zoom.jpg" alt="" />
+                                            <img class="default-image" src="/img/product-main-1.jpg" alt="" />
+                                            <img class="zoomed-image" src="/img/product-main-1-zoom.jpg" alt="" />
                                         </div>
                                         <div class="zoom-area"></div>
                                     </div>
@@ -1400,22 +664,22 @@ AppAsset::register($this);
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide selected">
                                                 <div class="paddings-container">
-                                                    <img src="img/product-main-1.jpg" alt="" />
+                                                    <img src="/img/product-main-1.jpg" alt="" />
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="paddings-container">
-                                                    <img src="img/product-main-2.jpg" alt="" />
+                                                    <img src="/img/product-main-2.jpg" alt="" />
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="paddings-container">
-                                                    <img src="img/product-main-3.jpg" alt="" />
+                                                    <img src="/img/product-main-3.jpg" alt="" />
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="paddings-container">
-                                                    <img src="img/product-main-4.jpg" alt="" />
+                                                    <img src="/img/product-main-4.jpg" alt="" />
                                                 </div>
                                             </div>
                                         </div>

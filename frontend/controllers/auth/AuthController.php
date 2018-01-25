@@ -8,6 +8,7 @@ use shop\forms\LoginForm;
 
 class AuthController extends Controller
 {
+	public $layout = 'index';
 	private $service;
 
 	public function __construct( $id, $module, AuthService $service, array $config = [])
