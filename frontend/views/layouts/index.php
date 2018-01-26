@@ -120,7 +120,7 @@ AppAsset::register($this);
                                                     <div class="menu-slider-entry">
                                                         <div class="product-slide-entry">
                                                             <div class="product-image">
-                                                                <img src="img/product-minimal-1.jpg" alt="" />
+                                                                <img src="/img/product-minimal-1.jpg" alt="" />
                                                                 <div class="bottom-line left-attached">
                                                                     <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
                                                                     <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
@@ -138,7 +138,7 @@ AppAsset::register($this);
                                                     <div class="menu-slider-entry">
                                                         <div class="product-slide-entry">
                                                             <div class="product-image">
-                                                                <img src="img/product-minimal-2.jpg" alt="" />
+                                                                <img src="/img/product-minimal-2.jpg" alt="" />
                                                                 <div class="bottom-line left-attached">
                                                                     <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
                                                                     <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
@@ -156,7 +156,7 @@ AppAsset::register($this);
                                                     <div class="menu-slider-entry">
                                                         <div class="product-slide-entry">
                                                             <div class="product-image">
-                                                                <img src="img/product-minimal-3.jpg" alt="" />
+                                                                <img src="/img/product-minimal-3.jpg" alt="" />
                                                                 <div class="bottom-line left-attached">
                                                                     <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
                                                                     <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
@@ -174,7 +174,7 @@ AppAsset::register($this);
                                                     <div class="menu-slider-entry">
                                                         <div class="product-slide-entry">
                                                             <div class="product-image">
-                                                                <img src="img/product-minimal-4.jpg" alt="" />
+                                                                <img src="/img/product-minimal-4.jpg" alt="" />
                                                                 <div class="bottom-line left-attached">
                                                                     <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
                                                                     <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
@@ -192,7 +192,7 @@ AppAsset::register($this);
                                                     <div class="menu-slider-entry">
                                                         <div class="product-slide-entry">
                                                             <div class="product-image">
-                                                                <img src="img/product-minimal-5.jpg" alt="" />
+                                                                <img src="/img/product-minimal-5.jpg" alt="" />
                                                                 <div class="bottom-line left-attached">
                                                                     <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
                                                                     <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
@@ -263,7 +263,7 @@ AppAsset::register($this);
                                     <a href="#">Pages</a><i class="fa fa-chevron-down"></i>
                                     <div class="submenu">
                                         <div class="product-column-entry">
-                                            <div class="image"><img alt="" src="img/product-menu-2.jpg"></div>
+                                            <div class="image"><img alt="" src="/img/product-menu-2.jpg"></div>
                                             <div class="submenu-list-title"><a href="contact.html">Contact Us</a><span class="toggle-list-button"></span></div>
                                             <div class="description toggle-list-container">
                                                 <ul class="list-type-1">
@@ -276,7 +276,7 @@ AppAsset::register($this);
                                             <div class="hot-mark">hot</div>
                                         </div>
                                         <div class="product-column-entry">
-                                            <div class="image"><img alt="" src="img/product-menu-4.jpg"></div>
+                                            <div class="image"><img alt="" src="/img/product-menu-4.jpg"></div>
                                             <div class="submenu-list-title"><a href="about-1.html">About Us</a><span class="toggle-list-button"></span></div>
                                             <div class="description toggle-list-container">
                                                 <ul class="list-type-1">
@@ -290,7 +290,7 @@ AppAsset::register($this);
                                             <div class="hot-mark yellow">sale</div>
                                         </div>
                                         <div class="product-column-entry">
-                                            <div class="image"><img alt="" src="img/product-menu-3.jpg"></div>
+                                            <div class="image"><img alt="" src="/img/product-menu-3.jpg"></div>
                                             <div class="submenu-list-title"><a href="cart.html">Cart</a><span class="toggle-list-button"></span></div>
                                             <div class="description toggle-list-container">
                                                 <ul class="list-type-1">
@@ -301,7 +301,7 @@ AppAsset::register($this);
                                             </div>
                                         </div>
                                         <div class="product-column-entry">
-                                            <div class="image"><img alt="" src="img/product-menu-5.jpg"></div>
+                                            <div class="image"><img alt="" src="/img/product-menu-5.jpg"></div>
                                             <div class="submenu-list-title"><a href="teaser-background.html">Coming Soon</a><span class="toggle-list-button"></span></div>
                                             <div class="description toggle-list-container">
                                                 <ul class="list-type-1">
@@ -313,7 +313,7 @@ AppAsset::register($this);
                                             <div class="hot-mark">hot</div>
                                         </div>
                                         <div class="product-column-entry">
-                                            <div class="image"><img alt="" src="img/product-menu-2.jpg"></div>
+                                            <div class="image"><img alt="" src="/img/product-menu-2.jpg"></div>
                                             <div class="submenu-list-title"><a href="shop.html">Products</a><span class="toggle-list-button"></span></div>
                                             <div class="description toggle-list-container">
                                                 <ul class="list-type-1">
@@ -351,7 +351,7 @@ AppAsset::register($this);
                                     <a href="portfolio-default.html">Portfolio</a><i class="fa fa-chevron-down"></i>
                                     <div class="submenu">
                                         <div class="full-width-menu-items-left">
-                                            <img class="submenu-background" src="img/product-menu-7.jpg" alt="" />
+                                            <img class="submenu-background" src="/img/product-menu-7.jpg" alt="" />
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="submenu-list-title"><a href="portfolio-default.html">Our Portfolio</a><span class="toggle-list-button"></span></div>
@@ -380,7 +380,7 @@ AppAsset::register($this);
                                     <a href="blog.html">Blog</a><i class="fa fa-chevron-down"></i>
                                     <div class="submenu">
                                         <div class="full-width-menu-items-left">
-                                            <img class="submenu-background" src="img/product-menu-8.jpg" alt="" />
+                                            <img class="submenu-background" src="/img/product-menu-8.jpg" alt="" />
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="submenu-list-title"><a href="blog.html">Blog <span class="menu-label blue">new</span></a><span class="toggle-list-button"></span></div>
@@ -420,6 +420,7 @@ AppAsset::register($this);
                                         </ul>
                                     </div>
                                 </li>
+                                <li><a href="/shop/catalog">Shop</a></li>
                             </ul>
 
                             <ul>
@@ -430,7 +431,7 @@ AppAsset::register($this);
                             </ul>
                             <div class="clear"></div>
 
-                            <a class="fixed-header-visible additional-header-logo"><img src="img/logo-9.png" alt=""/></a>
+                            <a class="fixed-header-visible additional-header-logo"><img src="/img/logo-9.png" alt=""/></a>
                         </nav>
                         <div class="navigation-footer responsive-menu-toggle-class">
                             <div class="socials-box">
@@ -452,7 +453,9 @@ AppAsset::register($this);
         </div>
 
         <div class="content-push">
+
 	        <?= $content ?>
+
             <!-- FOOTER -->
             <div class="footer-wrapper style-10">
                 <footer class="type-1">
