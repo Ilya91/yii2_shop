@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\widgets\Menu;
 
 AppAsset::register($this);
 ?>
@@ -39,7 +40,6 @@ AppAsset::register($this);
         <span id="bubble3"></span>
     </div>
 </div>
-
 <div id="content-block">
 
     <div class="content-center fixed-header-margin">
@@ -98,6 +98,9 @@ AppAsset::register($this);
                 </div>
 
                 <div class="close-header-layer"></div>
+
+
+
                 <div class="navigation">
                     <div class="navigation-header responsive-menu-toggle-class">
                         <div class="title">Navigation</div>
@@ -105,160 +108,31 @@ AppAsset::register($this);
                     </div>
                     <div class="nav-overflow">
                         <nav>
+                            <?php
+
+                            $checkController = function ($route) {
+                                return $route === $this->context->getUniqueId();
+                            };
+                            echo Menu::widget([
+                                'items' => [
+                                    // Important: you need to specify url as 'controller/action',
+                                    // not just as 'controller' even if default action is used.
+                                    ['label' => 'Home', 'url' => ['site/index']],
+                                    // 'Products' menu item will be selected as long as the route is 'product/index'
+                                    ['label' => 'Catalog', 'url' => ['shop/catalog'], 'active' => $checkController('shop/catalog')],
+                                    ['label' => 'Login', 'url' => ['auth/auth/login'], 'visible' => Yii::$app->user->isGuest],
+                                    ['label' => 'Item', 'url' => ['shop/catalog'], 'items' => [
+                                        ['label' => 'New Arrivals', 'url' => ['product/index', 'tag' => 'new']],
+                                        ['label' => 'Most Popular', 'url' => ['product/index', 'tag' => 'popular']],
+                                    ]],
+                                ],
+                            ]);
+                            ?>
+
+
+
+
                             <ul>
-                                <li class="full-width">
-                                    <a href="#" class="active">Home</a><i class="fa fa-chevron-down"></i>
-                                    <div class="submenu">
-                                        <div class="full-width-menu-items-right">
-                                            <div class="menu-slider-arrows">
-                                                <a class="left"><i class="fa fa-chevron-left"></i></a>
-                                                <a class="right"><i class="fa fa-chevron-right"></i></a>
-                                            </div>
-                                            <div class="submenu-list-title"><a href="#">Reccomended Products</a><span class="toggle-list-button"></span></div>
-                                            <div class="menu-slider-out">
-                                                <div class="menu-slider-in">
-                                                    <div class="menu-slider-entry">
-                                                        <div class="product-slide-entry">
-                                                            <div class="product-image">
-                                                                <img src="/img/product-minimal-1.jpg" alt="" />
-                                                                <div class="bottom-line left-attached">
-                                                                    <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="title">1.Pullover Batwing Sleeve Zigzag</a>
-                                                            <div class="price">
-                                                                <div class="prev">$199,99</div>
-                                                                <div class="current">$119,99</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-slider-entry">
-                                                        <div class="product-slide-entry">
-                                                            <div class="product-image">
-                                                                <img src="/img/product-minimal-2.jpg" alt="" />
-                                                                <div class="bottom-line left-attached">
-                                                                    <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="title">2.Pullover Batwing Sleeve Zigzag</a>
-                                                            <div class="price">
-                                                                <div class="prev">$199,99</div>
-                                                                <div class="current">$119,99</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-slider-entry">
-                                                        <div class="product-slide-entry">
-                                                            <div class="product-image">
-                                                                <img src="/img/product-minimal-3.jpg" alt="" />
-                                                                <div class="bottom-line left-attached">
-                                                                    <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="title">3.Pullover Batwing Sleeve Zigzag</a>
-                                                            <div class="price">
-                                                                <div class="prev">$199,99</div>
-                                                                <div class="current">$119,99</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-slider-entry">
-                                                        <div class="product-slide-entry">
-                                                            <div class="product-image">
-                                                                <img src="/img/product-minimal-4.jpg" alt="" />
-                                                                <div class="bottom-line left-attached">
-                                                                    <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="title">4.Pullover Batwing Sleeve Zigzag</a>
-                                                            <div class="price">
-                                                                <div class="prev">$199,99</div>
-                                                                <div class="current">$119,99</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-slider-entry">
-                                                        <div class="product-slide-entry">
-                                                            <div class="product-image">
-                                                                <img src="/img/product-minimal-5.jpg" alt="" />
-                                                                <div class="bottom-line left-attached">
-                                                                    <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
-                                                                    <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="title">5.Pullover Batwing Sleeve Zigzag</a>
-                                                            <div class="price">
-                                                                <div class="prev">$199,99</div>
-                                                                <div class="current">$119,99</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="full-width-menu-items-left">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="submenu-list-title"><a href="index-wide.html">Homepages <span class="menu-label blue">new</span></a><span class="toggle-list-button"></span></div>
-                                                    <ul class="list-type-1 toggle-list-container">
-                                                        <li><a href="index-wide.html"><i class="fa fa-angle-right"></i>Mango - Wide Header</a></li>
-                                                        <li><a href="index-electronic.html"><i class="fa fa-angle-right"></i>Mango - Electronic</a></li>
-                                                        <li><a href="index-everything.html"><i class="fa fa-angle-right"></i>Mango - Everything</a></li>
-                                                        <li><a href="index-fullwidthheader.html"><i class="fa fa-angle-right"></i>Mango - Fullwidth Header</a></li>
-                                                        <li><a href="index-food.html"><i class="fa fa-angle-right"></i>Mango - Food</a></li>
-                                                        <li><a href="index-underwear.html"><i class="fa fa-angle-right"></i>Mango - Underwear</a></li>
-                                                        <li><a href="index-bags.html"><i class="fa fa-angle-right"></i>Mango - Bags</a></li>
-                                                        <li><a href="index-fullwidth-noslider.html"><i class="fa fa-angle-right"></i>Mango - Fullwidth No Slider</a></li>
-                                                        <li><a href="index-lookbook.html"><i class="fa fa-angle-right"></i>Mango - Lookbook</a></li>
-                                                        <li><a href="index-wine-left.html"><i class="fa fa-angle-right"></i>Mango - Wine</a></li>
-                                                        <li><a href="index-fullwidth.html"><i class="fa fa-angle-right"></i>Mango - Fullwidth</a></li>
-                                                        <li><a href="index-fullwidth-left.html"><i class="fa fa-angle-right"></i>Mango - Fullwidth Left Sidebar</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="submenu-list-title"><a href="index-wide.html">Homepages <span class="menu-label blue">new</span></a><span class="toggle-list-button"></span></div>
-                                                    <ul class="list-type-1 toggle-list-container">
-                                                        <li><a href="index-parallax.html"><i class="fa fa-angle-right"></i>Mango - Parallax</a></li>
-                                                        <li><a href="index-grid.html"><i class="fa fa-angle-right"></i>Mango - Grid Light</a></li>
-                                                        <li><a href="index-leftsidebar.html"><i class="fa fa-angle-right"></i>Mango - Grid Left Sidebar</a></li>
-                                                        <li><a href="index-minimal.html"><i class="fa fa-angle-right"></i>Mango - Minimal</a></li>
-                                                        <li><a href="index-toys.html"><i class="fa fa-angle-right"></i>Mango - Toys</a></li>
-                                                        <li><a href="index-furniture.html"><i class="fa fa-angle-right"></i>Mango - Furniture</a></li>
-                                                        <li><a href="index-jewellery.html"><i class="fa fa-angle-right"></i>Mango - Jewellery</a></li>
-                                                        <li><a href="index-mini.html"><i class="fa fa-angle-right"></i>Mango - Mini</a></li>
-                                                        <li><a href="index-presentation.html"><i class="fa fa-angle-right"></i>Mango - Presentation</a></li>
-                                                        <li><a href="index-parallax-fullwidth.html"><i class="fa fa-angle-right"></i>Mango - Parallax Fullwidth</a></li>
-                                                        <li><a href="index-parallax-boxed.html"><i class="fa fa-angle-right"></i>Mango - Parallax Boxed</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="submenu-links-line">
-                                            <div class="submenu-links-line-container">
-                                                <div class="cell-view">
-                                                    <div class="line-links"><b>Quicklinks:</b>  <a href="#">Blazers</a>, <a href="#">Jackets</a>, <a href="#">Shoes</a>, <a href="#">Bags</a>, <a href="#">Special offers</a>, <a href="#">Sales and discounts</a></div>
-                                                </div>
-                                                <div class="cell-view">
-                                                    <div class="red-message"><b>-20% sale only this week. Don’t miss buy something!</b></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                                 <li class="full-width-columns">
                                     <a href="#">Pages</a><i class="fa fa-chevron-down"></i>
                                     <div class="submenu">
@@ -420,7 +294,6 @@ AppAsset::register($this);
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a href="/shop/catalog">Shop</a></li>
                             </ul>
 
                             <ul>
@@ -429,6 +302,8 @@ AppAsset::register($this);
                                     <a class="fixed-header-square-button open-search-popup"><i class="fa fa-search"></i></a>
                                 </li>
                             </ul>
+
+
                             <div class="clear"></div>
 
                             <a class="fixed-header-visible additional-header-logo"><img src="/img/logo-9.png" alt=""/></a>

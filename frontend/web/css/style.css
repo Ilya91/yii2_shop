@@ -3244,3 +3244,8 @@ _:-ms-input-placeholder, :root .simple-drop-down select{padding-right: 10px;}
 @media (max-width: 991px) and (min-width: 768px){
     .header-functionality-entry{margin-left: 15px;}
 }
+
+/* my custom styles */
+nav>ul>li.active{
+    background-color: #ca1515;
+}
