@@ -11,10 +11,10 @@ class CategoryReadRepository
 {
     private $client;
 
-    public function __construct(Client $client)
+    /*public function __construct(Client $client)
     {
         $this->client = $client;
-    }
+    }*/
 
     public function getRoot()
     {

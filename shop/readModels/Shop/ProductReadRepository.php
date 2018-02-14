@@ -21,17 +21,17 @@ class ProductReadRepository
 {
     private $client;
 
-    public function __construct(Client $client)
+    /*public function __construct(Client $client)
     {
         $this->client = $client;
-    }
+    }*/
 
     public function count()
     {
         return Product::find()->active()->count();
     }
 
-    public function getAllByRange(int $offset, int $limit)
+    public function getAllByRange($offset, $limit)
     {
         return Product::find()->alias('p')->active('p')->orderBy(['id' => SORT_ASC])->limit($limit)->offset($offset)->all();
     }

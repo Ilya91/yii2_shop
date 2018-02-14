@@ -522,6 +522,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="clear"></div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 blog-sidebar">
             <div class="information-blocks categories-border-wrapper">
                 <div class="block-title size-3">Categories</div>
@@ -826,10 +841,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<?/*= $this->render('_subcategories', [
+<?= $this->render('_subcategories', [
     'category' => $category
-]) */?><!--
+]) ?>
 
---><?/*= $this->render('_list', [
+<?= $this->render('_list', [
     'dataProvider' => $dataProvider
-]) */?>
+]) ?>
