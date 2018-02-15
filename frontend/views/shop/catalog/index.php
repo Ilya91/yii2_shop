@@ -4,6 +4,7 @@
 /* @var $dataProvider yii\data\DataProviderInterface */
 /* @var $category shop\entities\Shop\Category */
 
+use shop\entities\Shop\Category;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
@@ -11,13 +12,17 @@ $this->title = 'Catalog';
 $this->params['breadcrumbs'][] = ['label' => 'Shop', 'url'=> ['/shop/catalog']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .custom-ul li{
+        margin-left: 20px;
+    }
+</style>
 <div class="breadcrumb-box">
 	<?= Breadcrumbs::widget([
 		'itemTemplate' => "<li>'>'<i>{link}</i></li>\n",
 		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 	]) ?>
 </div>
-
 <div class="information-blocks">
     <div class="row">
         <div class="col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
@@ -538,6 +543,48 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         <div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 blog-sidebar">
+            <div class="information-blocks categories-border-wrapper">
+                <div class="block-title size-3">Categories</div>
+                <div class="accordeon">
+                            <ul class="custom-ul">
+	                <?php
+	                $categories = Category::find()->all();
+
+	                $depth=0;
+
+	                foreach($categories as $n => $category)
+	                {
+		                if($category->depth == $depth)
+			                echo Html::endTag('li')."\n";
+		                else if($category->depth > $depth)
+			                echo Html::beginTag('ul')."\n";
+		                else
+		                {
+			                echo Html::endTag('li')."\n";
+
+			                for($i=$depth-$category->depth;$i;$i--)
+			                {
+				                echo Html::endTag('ul')."\n";
+				                echo Html::endTag('li')."\n";
+			                }
+		                }
+
+		                echo Html::beginTag('li');
+		                echo Html::encode($category->title);
+		                $depth = $category->depth;
+	                }
+
+	                for($i=$depth;$i;$i--)
+	                {
+		                echo Html::endTag('li')."\n";
+		                echo Html::endTag('ul')."\n";
+	                }
+	                ?>
+
+                            </ul>
+                </div>
+            </div>
+
             <div class="information-blocks categories-border-wrapper">
                 <div class="block-title size-3">Categories</div>
                 <div class="accordeon">
