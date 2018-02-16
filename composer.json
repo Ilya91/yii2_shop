@@ -5,6 +5,18 @@
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    },
     "support": {
         "issues": "https://github.com/yiisoft/yii2/issues?state=open",
         "forum": "http://www.yiiframework.com/forum/",
@@ -18,7 +30,7 @@
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "dmstr/yii2-adminlte-asset": "2.*",
+        "dmstr/yii2-adminlte-asset": "^2.1",
         "webmozart/assert": "^1.2",
         "la-haute-societe/yii2-save-relations-behavior": "^1.2",
         "yiisoft/yii2-authclient": "^2.1",
@@ -42,6 +54,7 @@
         "yiisoft/yii2-redis": "^2.0",
         "zhuravljov/yii2-queue": "^1.0",
         "league/flysystem": "^1.0",
+        "npm-asset/metismenu":"2.7.3",
 
 
         "loveorigami/yii2-notification-wrapper": "*",

@@ -9,9 +9,12 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
+    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'aliases' => [
 	    '@staticRoot' => $params['staticPath'],
 	    '@static'   => $params['staticHostInfo'],
+	    '@bower' => '@vendor/bower-asset',
+	    '@npm'   => '@vendor/npm-asset'
     ],
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',

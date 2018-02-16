@@ -6,7 +6,11 @@
 
 use shop\entities\Shop\Category;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
+use frontend\assets\MetisMenuAsset;
+
+MetisMenuAsset::register($this);
 
 $this->title = 'Catalog';
 $this->params['breadcrumbs'][] = ['label' => 'Shop', 'url'=> ['/shop/catalog']];
@@ -17,6 +21,44 @@ $this->params['breadcrumbs'][] = $this->title;
         margin-left: 20px;
     }
 </style>
+
+<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<!--<script src="jquery.metisMenu.js"></script>-->
+<?php
+$this->registerJs(
+	"    $(function () {
+        $('#menu').metisMenu({
+
+            // auto collapse.
+            toggle: true,
+
+            // prevents or allows dropdowns' onclick events after expanding/collapsing.
+            preventDefault: true,
+
+            // CSS classes
+            activeClass: 'active',
+            collapseClass: 'collapse',
+            collapseInClass: 'in',
+            collapsingClass: 'collapsing',
+            triggerElement: 'a',
+            parentTrigger: 'li',
+            subMenu: 'ul'
+
+            // callbacks
+            onTransitionStart: false,
+            onTransitionEnd: false
+
+        });
+    });",
+	View::POS_READY
+);
+?>
+<script>
+
+</script>
 <div class="breadcrumb-box">
 	<?= Breadcrumbs::widget([
 		'itemTemplate' => "<li>'>'<i>{link}</i></li>\n",
@@ -546,7 +588,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="information-blocks categories-border-wrapper">
                 <div class="block-title size-3">Categories</div>
                 <div class="accordeon">
-                            <ul class="custom-ul">
+                    <ul class="custom-ul" id="menu">
 	                <?php
 	                $categories = Category::find()->all();
 
