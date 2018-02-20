@@ -14,7 +14,7 @@ return [
 	    '@staticRoot' => $params['staticPath'],
 	    '@static'   => $params['staticHostInfo'],
 	    '@bower' => '@vendor/bower-asset',
-	    '@npm'   => '@vendor/npm-asset'
+	    '@npm'   => '@vendor/npm'
     ],
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',

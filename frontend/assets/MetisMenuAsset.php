@@ -3,19 +3,23 @@
 namespace frontend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * Main frontend application asset bundle.
  */
 class MetisMenuAsset extends AssetBundle
 {
-    public $basePath = '@npm/metismenu/dist';
-    //public $baseUrl = '@web';
+    public $sourcePath = '@npm/metismenu';
 
     public $js = [
-        'metisMenu.js',
+	    'https://cdn.jsdelivr.net/npm/metismenu'
     ];
-    public $depends = [
-        'yii\web\YiiAsset'
-    ];
+	public $jsOptions = [
+		'position' => View::POS_END
+	];
+	public $depends   = [
+		'yii\web\JqueryAsset',
+		'yii\bootstrap\BootstrapAsset',
+	];
 }

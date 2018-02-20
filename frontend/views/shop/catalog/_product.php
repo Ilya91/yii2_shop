@@ -11,34 +11,44 @@ use yii\helpers\Url;
 $url = Url::to(['product', 'id' =>$product->id]);
 
 ?>
-
-<div class="product-layout product-list col-xs-12">
-    <div class="product-thumb">
-        <?php if ($product->mainPhoto): ?>
-            <div class="image">
-                <a href="<?= Html::encode($url) ?>">
-                    <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_list')) ?>" alt="" class="img-responsive" />
-                </a>
-            </div>
-        <?php endif; ?>
-        <div>
-            <div class="caption">
-                <h4><a href="<?= Html::encode($url) ?>"><?= Html::encode($product->name) ?></a></h4>
-                <p><?= Html::encode(StringHelper::truncateWords(strip_tags($product->description), 20)) ?></p>
-                <p class="price">
-                    <span class="price-new">$<?= PriceHelper::format($product->price_new) ?></span>
-                    <?php if ($product->price_old): ?>
-                        <span class="price-old">$<?= PriceHelper::format($product->price_old) ?></span>
-                    <?php endif; ?>
-                </p>
-            </div>
-            <div class="button-group">
-                <button type="button" href="<?= Url::to(['/shop/cart/add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-                <button type="button" data-toggle="tooltip" title="Add to Wish List" href="<?= Url::to(['/cabinet/wishlist/add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('<?= $product->id ?>');"><i class="fa fa-exchange"></i></button>
+<div class="col-md-3 col-sm-4 shop-grid-item">
+    <div class="product-slide-entry shift-image">
+        <div class="product-image">
+	        <?php if ($product->mainPhoto): ?>
+                <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_list')) ?>" alt="" />
+	        <?php endif; ?>
+	        <?php if ($product->mainPhoto): ?>
+                <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_list')) ?>" alt="" />
+	        <?php endif; ?>
+            <div class="bottom-line left-attached">
+                <a class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
+                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
+                <a class="bottom-line-a square"><i class="fa fa-retweet"></i></a>
+                <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
             </div>
         </div>
+        <a class="tag" href="#">Men clothing</a>
+        <a class="title" href="<?= Html::encode($url) ?>"><?= Html::encode($product->name) ?></a>
+        <div class="rating-box">
+            <div class="star"><i class="fa fa-star"></i></div>
+            <div class="star"><i class="fa fa-star"></i></div>
+            <div class="star"><i class="fa fa-star"></i></div>
+            <div class="star"><i class="fa fa-star"></i></div>
+            <div class="star"><i class="fa fa-star"></i></div>
+            <div class="reviews-number">25 reviews</div>
+        </div>
+        <div class="article-container style-1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="price">
+            <div class="prev">$199,99</div>
+            <div class="current">$119,99</div>
+        </div>
+        <div class="list-buttons">
+            <a class="button style-10">Add to cart</a>
+            <a class="button style-11"><i class="fa fa-heart"></i> Add to Wishlist</a>
+        </div>
     </div>
+    <div class="clear"></div>
 </div>
-
 
