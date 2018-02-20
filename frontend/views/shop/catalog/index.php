@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                 <div class="accordeon">
-                    <ul class="custom-ul metismenu" id="menu">
+                    <ul class="custom-ul" id="menu">
 	                <?php
 	                $categories = Category::find()->all();
 	                $depth = 0;
@@ -121,7 +121,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		                }
 
 		                echo Html::beginTag('li');
-		                echo Html::encode($category->title);
+		                echo Html::a($category->title, ['/shop/catalog/category', 'id' => $category->id], ['class' => 'profile-link']);
+		                //echo Html::encode($category->title);
 		                $depth = $category->depth;
 	                }
 
