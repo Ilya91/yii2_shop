@@ -58,6 +58,12 @@
     </div>
 </div>
 
+
+<h1>featured</h1>
+<?= \frontend\widgets\Shop\FeaturedProductsWidget::widget(['limit' => 4])?>
+
+
+
 <div class="information-blocks">
     <div class="tabs-container">
         <div class="swiper-tabs tabs-switch">

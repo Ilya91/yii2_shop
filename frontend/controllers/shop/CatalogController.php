@@ -141,6 +141,7 @@ class CatalogController extends Controller
 
         $cartForm = new AddToCartForm($product);
         $reviewForm = new ReviewForm();
+        //var_dump($product);
 
         return $this->render('product', [
             'product' => $product,
